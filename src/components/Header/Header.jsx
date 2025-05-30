@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import './Header.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import {useLocation} from 'react-router-dom';
+import {Link} from "react-router-dom";
 import {useAuth} from "../../AuthContext.jsx";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const { pathname } = useLocation();
-    const { isAuthenticated, logout } = useAuth();
+    const {pathname} = useLocation();
+    const {isAuthenticated, logout} = useAuth();
 
     // Закрытие меню при смене страницы
     useEffect(() => {

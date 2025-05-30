@@ -16,6 +16,7 @@ import ResultList from "./components/ResultList/ResultList.jsx";
 import EditResultForm from "./components/EditResultForm/EditResultForm.jsx";
 import EditTournamentForm from "./components/EditTournamentForm/EditTournamentForm.jsx";
 import CoachProfile from "./pages/Coaches/CoachProfile/CoachProfile.jsx";
+import {Profile} from "./pages/profile/profile.js";
 
 function App() {
     return (
@@ -25,11 +26,12 @@ function App() {
                 <main className="content">
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="/login/" element={<LoginForm />} />
-                        <Route path="/sign_up/" element={<SignUp />} />
-                        <Route path="/coach_profile/" element={<CoachProfile />} />
+                        <Route path="/login" element={<LoginForm />} />
+                        <Route path="/sign_up" element={<SignUp />} />
+                        <Route path="/coach_profile" element={<CoachProfile />} />
+                        <Route path="/profile" element={<Profile />} />
                         <Route
-                            path="/my_sportsmen/"
+                            path="/my_sportsmen"
                             element={
                                 <ProtectedAuthRoute>
                                     <MySportsmenPage />
@@ -61,7 +63,7 @@ function App() {
                             }
                         />
                         <Route
-                            path="/my_tournaments/"
+                            path="/my_tournaments"
                             element={
                                 <ProtectedAuthRoute>
                                     <TournamentsList />
@@ -93,7 +95,7 @@ function App() {
                             }
                         />
                         <Route
-                            path="/my_results/"
+                            path="/my_results"
                             element={
                                 <ProtectedAuthRoute>
                                     <ResultList />

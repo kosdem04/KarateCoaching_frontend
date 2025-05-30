@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './ResultList.css';
 import api from "../../api/axios.js";
 import { Link, useNavigate } from "react-router-dom";
+import {useMediaQuery} from "react-responsive";
+import {CardMobile} from "@/components/card-mobile/card-mobile.js";
 
 export default function ResultList() {
     const [tournaments, setTournaments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [expandedTournamentId, setExpandedTournamentId] = useState(null);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const isMobileScreen = useMediaQuery({query: '(max-width: 768px)'});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,10 +22,6 @@ export default function ResultList() {
                 console.error('Ошибка при получении данных:', error);
                 setLoading(false);
             });
-
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const toggleExpand = (id) => {
@@ -46,7 +44,7 @@ export default function ResultList() {
 
             <p className="table-hint">Чтобы посмотреть результаты, нажмите на нужный турнир</p>
 
-            {!isMobile ? (
+            {!isMobileScreen ? (
                 <table>
                     <thead>
                     <tr>
@@ -113,18 +111,14 @@ export default function ResultList() {
             ) : (
                 <div className="mobile-results">
                     {tournaments.map((tournament) => (
-                        <div
-                            className="mobile-result-card"
-                            key={tournament.id}
-                            onClick={() => toggleExpand(tournament.id)}
-                        >
+                        <CardMobile onClick={() => toggleExpand(tournament.id)}>
                             <p><strong>Название:</strong> {tournament.name}</p>
                             <p><strong>Начало:</strong> {new Date(tournament.date_start).toLocaleDateString('ru-RU')}
                             </p>
                             <p><strong>Окончание:</strong> {new Date(tournament.date_end).toLocaleDateString('ru-RU')}
                             </p>
 
-                            {expandedTournamentId === tournament.id && (
+                            {expandedTournamentId === tournament.id ? (
                                 <div className="result-details">
                                     {tournament.results?.length > 0 ? (
                                         tournament.results.map((res, idx) => (
@@ -142,8 +136,8 @@ export default function ResultList() {
                                         <p>Нет данных о результатах</p>
                                     )}
                                 </div>
-                            )}
-                        </div>
+                            ) : null}
+                        </CardMobile>
                     ))}
                 </div>
             )}
