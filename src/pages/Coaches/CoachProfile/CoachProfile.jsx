@@ -1,15 +1,16 @@
-// CoachesProfile.jsx
-import { useAuth } from "../../../AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
+import {useAuth} from "../../../AuthContext.jsx";
 import './CoachProfile.css';
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import api from "../../../api/axios.js";
-import CoachGroups from "../../../components/CoachComponents/CoachGroups"; // импортируем компонент
+import CoachGroups from "../../../components/CoachComponents/CoachGroups";
+import {Events} from "../../../components/events/events.js";
+import {Visited} from "@/components/visited/visited.js";
 
 const menuItems = [
-    { id: "groups", label: "Группы" },
-    { id: "events", label: "Мероприятия" },
-    { id: "results", label: "Результаты" },
+    {id: "groups", label: "Группы"},
+    {id: "events", label: "Мероприятия"},
+    {id: "results", label: "Результаты"},
+    {id: "visited", label: "Посещаемость"},
     // { id: "payments", label: "Оплата" },
     // { id: "purchases", label: "Мои покупки" },
     // { id: "education", label: "Моё обучение" },
@@ -18,10 +19,9 @@ const menuItems = [
 ];
 
 export default function CoachProfile() {
-    const { isAuthenticated } = useAuth();
+    const {isAuthenticated} = useAuth();
     const [coachData, setCoachData] = useState({});
     const [activeSection, setActiveSection] = useState("groups");
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -34,10 +34,13 @@ export default function CoachProfile() {
     const renderActiveSection = () => {
         switch (activeSection) {
             case "groups":
-                return <CoachGroups coachId={coachData.id} />;
-            // другие кейсы позже
+                return <CoachGroups coachId={coachData.id}/>;
+            case "events":
+                return <Events/>
+            case 'visited':
+                return <Visited/>
             default:
-                return <div style={{ padding: '2rem' }}>Раздел в разработке</div>;
+                return <div style={{padding: '2rem'}}>Раздел в разработке</div>;
         }
     };
 

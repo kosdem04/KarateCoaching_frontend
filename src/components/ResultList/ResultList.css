@@ -95,32 +95,6 @@ th {
         padding: 1rem;
     }
 
-    .mobile-result-card {
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        padding: 1.2rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        border-left: 4px solid black;
-        cursor: pointer;
-    }
-
-    .mobile-result-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .mobile-result-card p {
-        margin: 0.4em 0;
-        font-size: 1rem;
-        color: #333;
-    }
-
-    .mobile-result-card strong {
-        color: #000;
-        font-weight: 600;
-    }
-
     .result-details {
         margin-top: 0.8rem;
         background: #f7f7f7;
