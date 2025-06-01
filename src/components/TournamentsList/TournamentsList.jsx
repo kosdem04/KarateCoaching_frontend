@@ -4,15 +4,15 @@ import './TournamentsList.css'
 import api from "../../api/axios.js";
 
 export default function TournamentsList() {
-    const [tournaments, setTournaments] = useState([]);
+    const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.get('tournaments/')
+        api.get('events/')
             .then(response => {
-                setTournaments(response.data);
+                setEvents(response.data);
                 setLoading(false);
             })
             .catch(error => {
@@ -49,28 +49,31 @@ export default function TournamentsList() {
                     <table>
                         <thead>
                         <tr>
-                            <th>Название турнира</th>
+                            <th>Название мероприятия</th>
+                            <th>Тип мероприятия</th>
                             <th>Дата начала</th>
                             <th>Дата окончания</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {tournaments.map((tournament) => (
-                            <tr key={tournament.id} onClick={() => navigate(`/my_tournaments/${tournament.id}/edit`)} style={{ cursor: 'pointer' }}>
-                                <td>{tournament.name}</td>
-                                <td>{new Date(tournament.date_start).toLocaleDateString('ru-RU')}</td>
-                                <td>{new Date(tournament.date_end).toLocaleDateString('ru-RU')}</td>
+                        {events.map((event) => (
+                            <tr key={event.id} onClick={() => navigate(`/my_tournaments/${event.id}/edit`)}
+                                style={{cursor: 'pointer'}}>
+                                <td>{event.name}</td>
+                                <td>{event.type.name}</td>
+                                <td>{new Date(event.date_start).toLocaleDateString('ru-RU')}</td>
+                                <td>{new Date(event.date_end).toLocaleDateString('ru-RU')}</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 ) : (
                     <div className="mobile-cards">
-                        {tournaments.map((tournament) => (
-                            <div className="mobile-card" key={tournament.id} onClick={() => navigate(`/my_tournaments/${tournament.id}/edit`)}>
-                                <p><strong>Название:</strong> {tournament.name}</p>
-                                <p><strong>Начало:</strong> {new Date(tournament.date_start).toLocaleDateString('ru-RU')}</p>
-                                <p><strong>Окончание:</strong> {new Date(tournament.date_end).toLocaleDateString('ru-RU')}</p>
+                        {events.map((event) => (
+                            <div className="mobile-card" key={event.id} onClick={() => navigate(`/my_tournaments/${event.id}/edit`)}>
+                                <p><strong>Название:</strong> {event.name}</p>
+                                <p><strong>Начало:</strong> {new Date(event.date_start).toLocaleDateString('ru-RU')}</p>
+                                <p><strong>Окончание:</strong> {new Date(event.date_end).toLocaleDateString('ru-RU')}</p>
                             </div>
                         ))}
                     </div>

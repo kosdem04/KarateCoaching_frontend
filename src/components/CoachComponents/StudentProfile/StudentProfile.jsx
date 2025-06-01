@@ -9,9 +9,9 @@ export default function StudentProfile({ studentId, onClose }) {
 
     useEffect(() => {
         if (!studentId) return;
-        api.get(`students/${studentId}/`)
+        api.get(`students/${studentId}`)
             .then(response => {
-                setStudentInfo(response.data.student);
+                setStudentInfo(response.data.student_data);
                 setLoading(false);
             })
             .catch(error => {

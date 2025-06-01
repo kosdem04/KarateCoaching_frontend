@@ -6,12 +6,22 @@ import {useNavigate} from "react-router-dom";
 export default function TournamentAddForm() {
     const [message, setMessage] = useState({ text: '', type: '' });
     const navigate = useNavigate();
+    const [types, setTypes] = useState([]);
 
     const [formData, setFormData] = useState({
         name: '',
+        type_id: '',
         date_start: '',
         date_end: '',
     });
+
+
+    useEffect(() => {
+        api.get("events/types")
+            .then(response  => {
+                setTypes(response.data);
+            });
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,11 +35,11 @@ export default function TournamentAddForm() {
             return;
         }
 
-        api.post("tournaments/add",  formData)
+        api.post("events/add",  formData)
             .then(response  => {
                 console.log("Успешно добавлено:");
-                setMessage({ text: 'Турнир успешно добавлен!', type: 'success' });
-                setFormData({ name: '', date_start: '', date_end: '' });
+                setMessage({ text: 'Мероприятие успешно добавлено!', type: 'success' });
+                setFormData({ name: '', type_id: '', date_start: '', date_end: '' });
 //                 setTimeout(() => {
 //                     setMessage({ text: '', type: '' });
 //                     navigate("/my_tournaments"); // переход через 2 секунды
@@ -39,7 +49,7 @@ export default function TournamentAddForm() {
                 }, 1500);
             })
             .catch(error => {
-                setMessage({ text: 'Такой турнир уже есть', type: 'error' });
+                setMessage({ text: 'Такое мероприятие уже есть', type: 'error' });
                 console.error('Ошибка при получении данных:', error);
                 setTimeout(() => setMessage({ text: '', type: '' }), 3000);
             })
@@ -49,12 +59,12 @@ export default function TournamentAddForm() {
         <>
             <div className="add-result-page">
                 <div className="header">
-                    <h1>Добавить турнир</h1>
+                    <h1>Добавить мероприятие</h1>
                 </div>
 
                 <form className="result-form" onSubmit={handleSubmit}>
                     <label>
-                        Название турнира:
+                        Название мероприятия:
                         <input
                             type="text"
                             name="name"
@@ -64,23 +74,39 @@ export default function TournamentAddForm() {
                         />
                     </label>
                     <label>
-                        Дата начала соревнований:
+                        Тип мероприятия:
+                        <select
+                            name="type_id"
+                            value={formData.type_id}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="">Выберите...</option>
+                            {types.map(type => (
+                                <option
+                                    key={type.id}
+                                    value={type.id}>{type.name}</option>
+                            ))}
+                        </select>
+                    </label>
+                    <label>
+                        Дата начала мероприятия:
                         <input
                             type="date"
                             name="date_start"
                             value={formData.date_start}
                             onChange={handleChange}
-                               required
+                            required
                         />
                     </label>
                     <label>
-                        Дата окончания соревнований:
+                        Дата окончания мероприятия:
                         <input
                             type="date"
                             name="date_end"
                             value={formData.date_end}
                             onChange={handleChange}
-                               required
+                            required
                         />
                     </label>
 

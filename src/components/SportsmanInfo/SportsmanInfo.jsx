@@ -10,7 +10,7 @@ import {
 
 export default function SportsmanInfo() {
     const { id } = useParams();
-    const [sportsmanInfo, setSportsmanInfo] = useState({});
+    const [studentInfo, setStudentInfo] = useState({});
     const [resultsInfo, setResultsInfo] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
@@ -23,10 +23,22 @@ export default function SportsmanInfo() {
     };
 
     useEffect(() => {
-        api.get(`sportsmen/${id}`)
+        api.get(`students/${id}`)
             .then(response => {
-                setSportsmanInfo(response.data.sportsman);
-                setResultsInfo(response.data.results);
+                setStudentInfo(response.data);
+                console.log(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Ошибка при получении данных:', error);
+                setLoading(false);
+                if (error.response?.status === 403) {
+                    navigate("/"); // редирект на главную
+                }
+            });
+        api.get(`students/${id}/results`)
+            .then(response => {
+                setResultsInfo(response.data);
                 setLoading(false);
             })
             .catch(error => {
@@ -39,7 +51,7 @@ export default function SportsmanInfo() {
     }, [id]);
 
     const handleDelete = () => {
-        api.delete(`sportsmen/${id}`)
+        api.delete(`students/${id}`)
             .then(response => {
                 navigate("/my_sportsmen");
                 // Можно перенаправить пользователя или обновить состояние
@@ -70,8 +82,8 @@ export default function SportsmanInfo() {
                 </div>
             </div>
             <section className="fighter-profile">
-                <img src={sportsmanInfo.img_url} alt={sportsmanInfo.last_name}/>
-                <h1>{sportsmanInfo.last_name} {sportsmanInfo.first_name} {sportsmanInfo.patronymic}</h1>
+                <img src={studentInfo.student_data.img_url} alt={studentInfo.student_data.last_name}/>
+                <h1>{studentInfo.student_data.last_name} {studentInfo.student_data.first_name} {studentInfo.student_data.patronymic}</h1>
             </section>
 
             <section className="chart-section">
@@ -80,9 +92,9 @@ export default function SportsmanInfo() {
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart
                             data={resultsInfo.map(res => ({
-                                name: res.tournament.name.length > 10
-                                    ? res.tournament.name.slice(0, 10) + '…'
-                                    : res.tournament.name,
+                                name: res.event.name.length > 10
+                                    ? res.event.name.slice(0, 10) + '…'
+                                    : res.event.name,
                                 efficiency: res.efficiency,
                                 average_score: res.average_score
                             }))}
@@ -119,7 +131,7 @@ export default function SportsmanInfo() {
                         <tbody>
                         {resultsInfo.map((result, index) => (
                             <tr>
-                                <td> {result.tournament.name}</td>
+                                <td> {result.event.name}</td>
                                 <td><span className={getRankClass(result.place.name)}>
                                         {result.place.name}</span></td>
                                 <td> {result.points_scored}</td>
@@ -128,7 +140,7 @@ export default function SportsmanInfo() {
                                 <td> {result.efficiency}</td>
                                 <td> {result.number_of_fights}</td>
                                 <td>
-                                    {new Date(result.tournament.date_start).toLocaleDateString('ru-RU')}
+                                    {new Date(result.event.date_start).toLocaleDateString('ru-RU')}
                                 </td>
                             </tr>
                         ))}

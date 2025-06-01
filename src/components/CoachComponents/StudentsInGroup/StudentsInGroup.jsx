@@ -11,7 +11,7 @@ export default function StudentsInGroup({ groupId, onClose }) {
     useEffect(() => {
         if (!groupId) return;
         setLoading(true);
-        api.get(`groups/${groupId}/students/`)
+        api.get(`groups/${groupId}/students`)
             .then(response => {
                 setStudents(response.data);
                 setLoading(false);
@@ -35,8 +35,8 @@ export default function StudentsInGroup({ groupId, onClose }) {
                     ) : students.length > 0 ? (
                         <ul className="students-list">
                             {students.map(student => (
-                                <li key={student.student.id} onClick={() => setSelectedStudentId(student.student.id)}>
-                                    {student.student.last_name} {student.student.first_name}
+                                <li key={student.id} onClick={() => setSelectedStudentId(student.id)}>
+                                    {student.last_name} {student.first_name}
                                 </li>
                             ))}
                         </ul>
