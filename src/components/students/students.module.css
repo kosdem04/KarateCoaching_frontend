@@ -1,0 +1,20 @@
+.card_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 400px));
+    flex-direction: column;
+    gap: 16px;
+}
+.card_schedule{
+    background-color: #ececec;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+.line{
+    border-bottom: 1px solid #6c757d;
+    width: 100%;
+    max-width: 400px;
+    height: 1px;
+    border-radius: 12px;
+}

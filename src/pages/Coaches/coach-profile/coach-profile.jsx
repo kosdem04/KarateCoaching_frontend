@@ -7,11 +7,15 @@ import {ResultList} from "@/components/ResultList/result-list.tsx";
 import {useGetEventsQuery} from "@/api/events.js";
 import {EventsStudent} from "@/components/events/events.js";
 import {useGetUserDataQuery} from "@/api/auth.js";
+import {Schedules} from "@/pages/profile-user/components/schedules/schedules.js";
+import {Students} from "@/components/students/students.js";
 
 const menuItems = [
     {id: "groups", label: "Группы"},
     {id: "events", label: "Мероприятия"},
     {id: "results", label: "Результаты"},
+    {id: "schedule", label: "Расписание"},
+    {id: "students", label: "Ученики"},
     // { id: "payments", label: "Оплата" },
     // { id: "purchases", label: "Мои покупки" },
     // { id: "education", label: "Моё обучение" },
@@ -48,6 +52,10 @@ export default function CoachProfile() {
                 return events && <EventsStudent events={events}/>
             case "results":
                 return <ResultList/>
+            case "schedule":
+                return <Schedules/>
+            case "students":
+                return <Students/>
             default:
                 return <div style={{padding: '2rem'}}>Раздел в разработке</div>;
         }
