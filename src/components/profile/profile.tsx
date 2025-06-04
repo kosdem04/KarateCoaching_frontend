@@ -57,13 +57,13 @@ export const Profile: FC<Props> = memo(({user, refetch}) => {
         const file = e.target.files?.[0];
         if (file) {
             const formData = new FormData();
-            formData.append('avatar', (URL.createObjectURL(file)).trim());
+            formData.append('avatar', file);
             api.patch(`${usersUpdate}/${user.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(() => {
-                setShowModal(prev => !prev);
+                // setShowModal(prev => !prev);
                 refetch()
             })
             // updateProfile({id: user.id, formData}).unwrap().then(() => refetch())

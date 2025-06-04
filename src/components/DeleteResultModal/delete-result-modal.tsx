@@ -1,7 +1,6 @@
-import React from "react";
 import './DeleteResultModal.css'; // Создайте CSS для стилизации модального окна
 
-const DeleteResultModal = ({ show, onClose, onConfirm }) => {
+const DeleteResultModal = ({ show, onClose, onConfirm }: any) => {
     if (!show) return null;
 
     return (

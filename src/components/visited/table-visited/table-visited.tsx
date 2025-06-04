@@ -5,13 +5,13 @@ import {dates, DayWeek, Participant, updateParticipantAttendance} from "./consta
 import {DescriptionsVisits} from "@/components/visited/descriptions-visits/descriptions-visits.tsx";
 import delete_icon from '@/assets/icons/icon_cross.svg';
 import {useGetStudentsInGroupQuery} from "@/api/groups.ts";
-import {Link} from "react-router-dom";
 
 interface Props {
     groupId: number;
+    openStudentInfo: (id: number) => void;
 }
 
-export const TableVisited: FC<Props> = memo(({groupId}) => {
+export const TableVisited: FC<Props> = memo(({groupId, openStudentInfo}) => {
     const [participants, setParticipants] = useState<Participant[]>([]);
     const {data: students} = useGetStudentsInGroupQuery(groupId);
 
@@ -66,7 +66,7 @@ export const TableVisited: FC<Props> = memo(({groupId}) => {
                 renderTbody={participants?.map((item) => (
                     <tr key={item.id}>
                         <td className={s.name_users}>
-                            <Link to={`/profile/${item.id}`}>{item.name}</Link>
+                            <h4 onClick={()=>openStudentInfo(item.id)}>{item.name}</h4>
                             <button className={s.button_delete} onClick={() => deleteVisited(item.id)}>
                                 <img src={delete_icon} alt="delete icon"/>
                             </button>

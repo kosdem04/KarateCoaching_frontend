@@ -1,11 +1,11 @@
 import s from './profile-user.module.css';
-import {memo, useState} from "react";
+import {FC, memo, useState} from "react";
 import {Profile, UserInfo} from "@/components/profile/profile.tsx";
 import {Schedules} from "@/pages/profile-user/components/schedules/schedules.tsx";
-import {useParams} from "react-router-dom";
 import {useGetStudentProfileQuery} from "@/api/students.ts";
 import {EventsProfile} from "@/pages/profile-user/components/events-student/events-student.tsx";
 import {ResultsStudent} from "@/pages/profile-user/components/results-student/results-student.tsx";
+import { jwtDecode } from 'jwt-decode';
 
 const buttons = [
     {title: 'Расписания', id: 'schedule'},
@@ -13,11 +13,16 @@ const buttons = [
     {title: 'Результаты', id: 'results'},
 ]
 
-export const ProfileUser = memo(() => {
+interface Props {
+    student_id?: number;
+}
+
+export const ProfileUser:FC<Props> = memo(({student_id}) => {
     const [listActive, setListActive] = useState(buttons[0].id);
-    const params = useParams();
-    const studentId = params.id ? +params.id : 0;
-    const {data: student, refetch} = useGetStudentProfileQuery(studentId)
+    const jwt = localStorage.getItem('token')
+    const studentId = jwt ? (jwtDecode(jwt)?.sub ?? 0) : 0;
+
+    const {data: student, refetch} = useGetStudentProfileQuery(student_id || +studentId)
 
 
     const onClickHandler = (id: string) => setListActive(id)
@@ -48,7 +53,7 @@ export const ProfileUser = memo(() => {
                 })}
             </div>
             {listActive === buttons[0].id && <Schedules/>}
-            {listActive === buttons[1].id && <EventsProfile studentId={studentId}/>}
+            {listActive === buttons[1].id && <EventsProfile studentId={student_id || +studentId}/>}
             {listActive === buttons[2].id && <ResultsStudent pageStudent={true}/>}
         </section>
     );

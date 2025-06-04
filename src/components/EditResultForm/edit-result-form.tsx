@@ -1,19 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import './EditResultForm.css';
 import api from "../../api/axios.ts";
-import DeleteTournamentModal from "../DeleteTournamentModal/DeleteTournamentModal.jsx";
-import DeleteResultModal from "../DeleteResultModal/DeleteResultModal.jsx";
+import DeleteResultModal from "../DeleteResultModal/delete-result-modal.tsx";
+import {useGetStudentsQuery} from "@/api/students.ts";
+import {useGetEventsTypesQuery} from "@/api/events.ts";
+import {useGetResultsPlacesQuery} from "@/api/results.ts";
+
+interface Form {
+    tournament_id: string
+    sportsman_id: string
+    place_id: string
+    points_scored: string
+    points_missed: string
+    number_of_fights: string
+}
 
 export default function EditResultForm() {
     const { id } = useParams(); // id результата
-    const [tournaments, setTournaments] = useState([]);
-    const [places, setPlaces] = useState([]);
-    const [sportsmen, setSportsmen] = useState([]);
+    const {data: sportsmen} = useGetStudentsQuery()
+    const {data: tournaments} = useGetEventsTypesQuery()
+    const {data: places} = useGetResultsPlacesQuery()
+    // const [sportsmen, setSportsmen] = useState([]);
     const [message, setMessage] = useState({ text: '', type: '' });
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<Form>({
         tournament_id: '',
         sportsman_id: '',
         place_id: '',
@@ -21,25 +33,16 @@ export default function EditResultForm() {
         points_missed: '',
         number_of_fights: ''
     });
-    const [originalData, setOriginalData] = useState({
-        tournament_id: 0,
-        sportsman_id: 0,
-        place_id: 0,
-        points_scored: 0,
-        points_missed: 0,
-        number_of_fights: 0
+    const [originalData, setOriginalData] = useState<Form>({
+        tournament_id: '0',
+        sportsman_id: '0',
+        place_id: '0',
+        points_scored: '0',
+        points_missed: '0',
+        number_of_fights: '0'
     });
 
     useEffect(() => {
-        api.get("tournaments/")
-            .then(res => setTournaments(res.data));
-
-        api.get("results/places/")
-            .then(res => setPlaces(res.data));
-
-        api.get("sportsmen/")
-            .then(res => setSportsmen(res.data));
-
         api.get(`results/${id}`)
             .then(res => {
                 setFormData(res.data);
@@ -49,7 +52,7 @@ export default function EditResultForm() {
 
     const handleDelete = () => {
         api.delete(`results/${id}`)
-            .then(response => {
+            .then(() => {
                 navigate("/my_results");
                 // Можно перенаправить пользователя или обновить состояние
             })
@@ -59,7 +62,7 @@ export default function EditResultForm() {
         setShowModal(false); // Закрываем модальное окно после удаления
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e:any) => {
         const { name, value } = e.target;
 
         // Преобразуем все значения в числа (в том числе пустые строки будут преобразовываться в NaN)
@@ -70,7 +73,7 @@ export default function EditResultForm() {
 
     const isChanged = JSON.stringify(formData) !== JSON.stringify(originalData);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
         if (!isChanged) return;
 
@@ -110,7 +113,7 @@ export default function EditResultForm() {
                         required
                     >
                         <option value="">Выберите...</option>
-                        {tournaments.map(t => (
+                        {tournaments?.map(t => (
                             <option key={t.id} value={t.id}>{t.name}</option>
                         ))}
                     </select>
@@ -125,7 +128,7 @@ export default function EditResultForm() {
                         required
                     >
                         <option value="">Выберите...</option>
-                        {sportsmen.map(s => (
+                        {sportsmen?.map(s => (
                             <option key={s.id} value={s.id}>{s.last_name} {s.first_name}</option>
                         ))}
                     </select>
@@ -140,7 +143,7 @@ export default function EditResultForm() {
                         required
                     >
                         <option value="">Выберите...</option>
-                        {places.map(p => (
+                        {places?.map(p => (
                             <option key={p.id} value={p.id}>{p.name}</option>
                         ))}
                     </select>

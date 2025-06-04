@@ -6,3 +6,57 @@
     background-color: #1a1a1a;
     color: #dddddd;
 }
+.group_details_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    z-index: 2000;
+    animation: slideInFromRight 0.3s ease forwards;
+}
+
+.delete_button {
+    width: 20%;
+    background-color: rgba(0, 0, 0, 0.1); /* прозрачность */
+    cursor: pointer;
+    position: relative;
+    display: flex;
+
+    img {
+        height: 22px;
+        width: 22px;
+        background-color: transparent;
+    }
+}
+.card_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+.card_schedule{
+    background-color: #ececec;
+    border-radius: 12px;
+    padding: 16px;
+}
+.group_details_panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 80%;
+    background-color: #fff;
+    padding: 24px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

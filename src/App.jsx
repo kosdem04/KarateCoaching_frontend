@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import MainPage from "./pages/MainPage/MainPage.jsx";
@@ -13,7 +13,7 @@ import AddResultForm from "./components/AddResultForm/add-result-form.tsx";
 import AddSportsmanForm from "./components/AddSportsmanForm/AddSportsmanForm.jsx";
 import EditSportsmanForm from "./components/EditSportsmanForm/EditSportsmanForm.jsx";
 import {ResultList} from "./components/ResultList/result-list.tsx";
-import EditResultForm from "./components/EditResultForm/EditResultForm.jsx";
+import EditResultForm from "./components/EditResultForm/edit-result-form.tsx";
 import EditTournamentForm from "./components/EditTournamentForm/EditTournamentForm.jsx";
 import CoachProfile from "./pages/Coaches/coach-profile/coach-profile.jsx";
 import {ProfileUser} from "./pages/profile-user/profile-user.tsx";
@@ -22,19 +22,24 @@ function App() {
     return (
         <Router>
             <div className="page-container">
-                <Header />
+                <Header/>
                 <main className="content">
                     <Routes>
-                        <Route path="/" element={<MainPage />} />
-                        <Route path="/login" element={<LoginForm />} />
-                        <Route path="/sign_up" element={<SignUp />} />
-                        <Route path="/coach_profile" element={<CoachProfile />} />
-                        <Route path="/profile/:id" element={<ProfileUser />} />
+                        <Route path="/" element={<MainPage/>}/>
+                        <Route path="/login" element={<LoginForm/>}/>
+                        <Route path="/sign_up" element={<SignUp/>}/>
+                        <Route path="/coach_profile"
+                               element={<ProtectedAuthRoute>
+                                   <CoachProfile/>
+                               </ProtectedAuthRoute>}/>
+                        <Route path="/profile" element={<ProtectedAuthRoute>
+                            <ProfileUser/>
+                        </ProtectedAuthRoute>}/>
                         <Route
                             path="/my_sportsmen"
                             element={
                                 <ProtectedAuthRoute>
-                                    <MySportsmenPage />
+                                    <MySportsmenPage/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -42,7 +47,7 @@ function App() {
                             path="/my_sportsmen/:id"
                             element={
                                 <ProtectedAuthRoute>
-                                    <SportsmanInfo />
+                                    <SportsmanInfo/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -50,7 +55,7 @@ function App() {
                             path="/my_sportsmen/:id/edit"
                             element={
                                 <ProtectedAuthRoute>
-                                    <EditSportsmanForm />
+                                    <EditSportsmanForm/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -58,7 +63,7 @@ function App() {
                             path="/my_sportsmen/add"
                             element={
                                 <ProtectedAuthRoute>
-                                    <AddSportsmanForm />
+                                    <AddSportsmanForm/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -66,7 +71,7 @@ function App() {
                             path="/my_tournaments"
                             element={
                                 <ProtectedAuthRoute>
-                                    <TournamentsList />
+                                    <TournamentsList/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -74,7 +79,7 @@ function App() {
                             path="/my_tournaments/:id/edit"
                             element={
                                 <ProtectedAuthRoute>
-                                    <EditTournamentForm />
+                                    <EditTournamentForm/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -82,7 +87,7 @@ function App() {
                             path="/my_tournaments/add"
                             element={
                                 <ProtectedAuthRoute>
-                                    <TournamentAddForm />
+                                    <TournamentAddForm/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -90,7 +95,7 @@ function App() {
                             path="/my_results/add"
                             element={
                                 <ProtectedAuthRoute>
-                                    <AddResultForm />
+                                    <AddResultForm/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -98,7 +103,7 @@ function App() {
                             path="/my_results"
                             element={
                                 <ProtectedAuthRoute>
-                                    <ResultList />
+                                    <ResultList/>
                                 </ProtectedAuthRoute>
                             }
                         />
@@ -106,13 +111,13 @@ function App() {
                             path="/my_results/:id/edit"
                             element={
                                 <ProtectedAuthRoute>
-                                    <EditResultForm />
+                                    <EditResultForm/>
                                 </ProtectedAuthRoute>
                             }
                         />
                     </Routes>
                 </main>
-                <Footer />
+                <Footer/>
             </div>
         </Router>
     );
