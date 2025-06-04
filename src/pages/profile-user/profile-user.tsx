@@ -49,7 +49,7 @@ export const ProfileUser = memo(() => {
             </div>
             {listActive === buttons[0].id && <Schedules/>}
             {listActive === buttons[1].id && <EventsProfile studentId={studentId}/>}
-            {listActive === buttons[2].id && <ResultsStudent/>}
+            {listActive === buttons[2].id && <ResultsStudent pageStudent={true}/>}
         </section>
     );
 });

@@ -49,7 +49,7 @@ export default function CoachProfile() {
             case "groups":
                 return <CoachGroups coachId={user}/>;
             case "events":
-                return events && <EventsStudent events={events}/>
+                return events && <EventsStudent events={events} />
             case "results":
                 return <ResultList/>
             case "schedule":

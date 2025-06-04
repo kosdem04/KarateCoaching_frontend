@@ -9,5 +9,5 @@ interface Props {
 export const EventsProfile:FC<Props> = memo(({studentId}) => {
 const {data} = useGetEventsStudentQuery(studentId)
 
-    return <EventsStudent events={data || []}/>;
+    return <EventsStudent events={data || []} pageStudent={true}/>;
 });

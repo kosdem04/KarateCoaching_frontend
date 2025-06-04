@@ -28,7 +28,8 @@ export default function CoachGroups() {
             <div className={s.title_wrapper}>
                 <h3>Мои группы</h3>
                 <div className={s.input_wrapper}>
-                    <input type="text" onChange={changeName} value={newGroup} className={s.input_form}/>
+                    <input type="text" onChange={changeName} value={newGroup} className={s.input_form}
+                           placeholder={'Введите название группы'}/>
                     <button className={s.button_add_group} onClick={onClickCreateGroup}
                             disabled={!newGroup}>Добавить
                     </button>

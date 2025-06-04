@@ -24,7 +24,7 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
         <>
             <div className={s.title_wrapper}>
                 <h2>Список мероприятий</h2>
-                {pageStudent && <button className={s.add_event} onClick={onClickUpdateEvent}>Добавить</button>}
+                {!pageStudent && <button className={s.add_event} onClick={onClickUpdateEvent}>Добавить</button>}
             </div>
             <Table
                 renderThead={tableHead.map((item, index) => (
