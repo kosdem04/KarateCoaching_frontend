@@ -1,6 +1,6 @@
 .card_container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 400px));
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     flex-direction: column;
     gap: 16px;
 }
@@ -9,7 +9,6 @@
     border-radius: 12px;
     padding: 16px;
     width: 100%;
-    max-width: 400px;
 }
 .line{
     border-bottom: 1px solid #6c757d;

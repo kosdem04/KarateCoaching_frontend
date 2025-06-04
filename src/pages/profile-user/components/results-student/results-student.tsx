@@ -3,10 +3,10 @@ import {Link} from "react-router-dom";
 import {useGetResultsQuery} from "@/api/results.ts";
 
 interface Props {
-    studentId: number;
+    pageStudent?: boolean;
 }
 
-export const ResultsStudent: FC<Props> = memo(() => {
+export const ResultsStudent: FC<Props> = memo(({pageStudent}) => {
     const [expandedTournamentId, setExpandedTournamentId] = useState<null | number>(null);
     // const {data: results} = useGetResultsStudentQuery(studentId);
     const {data: results} = useGetResultsQuery();
@@ -16,7 +16,7 @@ export const ResultsStudent: FC<Props> = memo(() => {
     };
 
     return <div className="content">
-        <div className="profile-header">
+        {pageStudent && <div className="profile-header">
             <div className="profile-actions">
                 <Link to={`/my_results/add`}>
                     <button className="add-btn">
@@ -24,7 +24,7 @@ export const ResultsStudent: FC<Props> = memo(() => {
                     </button>
                 </Link>
             </div>
-        </div>
+        </div>}
 
         <p className="table-hint">Чтобы посмотреть результаты, нажмите на нужный турнир</p>
         <table>

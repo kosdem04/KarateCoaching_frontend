@@ -10,3 +10,6 @@ export const students = '/students/';
 export const users = '/users/';
 export const usersUpdate = '/users/update';
 export const authGetUserData = '/auth/get_user_data';
+export const usersPasswordForgot = '/users/password/forgot';
+export const usersPasswordReset = '/users/password/reset';
+export const studentRegisterCoach = '/auth/student/register/coach/';

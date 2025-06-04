@@ -30,7 +30,6 @@ export const Schedules = memo(() => {
                                 <p><strong>Адрес:</strong> {item.address}</p>
                                 <p><strong>Посещаемость:</strong> {item.visited}</p>
                             </div>
-                            {schedules.length !== index + 1 && <hr className={s.line}/>}
                         </Fragment>)
                 })}
             </div>

@@ -10,9 +10,10 @@ const tableHead = ['Название турнира', 'Тип мероприят
 
 interface Props {
     events: Events[];
+    pageStudent?: boolean;
 }
 
-export const EventsStudent:FC<Props> = memo(({events}) => {
+export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
     const [updateEvent, setUpdateEvent] = useState(false);
 
     const onClickUpdateEvent = () => {
@@ -23,7 +24,7 @@ export const EventsStudent:FC<Props> = memo(({events}) => {
         <>
             <div className={s.title_wrapper}>
                 <h2>Список мероприятий</h2>
-                <button className={s.add_event} onClick={onClickUpdateEvent}>Добавить</button>
+                {pageStudent && <button className={s.add_event} onClick={onClickUpdateEvent}>Добавить</button>}
             </div>
             <Table
                 renderThead={tableHead.map((item, index) => (

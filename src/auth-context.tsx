@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import api from "./api/axios.js";
 
+// @ts-ignore
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(null); // null = загрузка
+export function AuthProvider({ children }: { children: ReactNode }) {
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean| null>(null); // null = загрузка
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -21,7 +22,7 @@ export function AuthProvider({ children }) {
             .finally(() => setLoading(false));
     }, []);
 
-    const login = (token) => {
+    const login = (token:string) => {
         localStorage.setItem("token", token);
         setIsAuthenticated(true);
     };

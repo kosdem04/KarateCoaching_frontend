@@ -1,4 +1,4 @@
-import {useAuth} from "@/AuthContext.jsx";
+import {useAuth} from "@/auth-context.tsx";
 import './coach-profile.css';
 import {useState} from "react";
 import CoachGroups from "../../../components/CoachComponents/coach-groups.js";
