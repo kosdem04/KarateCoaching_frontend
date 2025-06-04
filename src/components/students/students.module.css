@@ -9,6 +9,7 @@
     border-radius: 12px;
     padding: 16px;
     width: 100%;
+    cursor: pointer;
 }
 .line{
     border-bottom: 1px solid #6c757d;
@@ -114,4 +115,36 @@
     height: 200px;
     object-fit: cover;
     border-radius: 50%;
+}
+.group_details_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    z-index: 2000;
+    animation: slideInFromRight 0.3s ease forwards;
+}
+
+.delete_button {
+    width: 20%;
+    background-color: rgba(0, 0, 0, 0.1); /* прозрачность */
+    cursor: pointer;
+    position: relative;
+    display: flex;
+
+    img {
+        height: 22px;
+        width: 22px;
+        background-color: transparent;
+    }
+}
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }

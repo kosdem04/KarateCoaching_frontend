@@ -1,6 +1,8 @@
 import s from './students.module.css';
-import {Fragment, memo} from "react";
+import {memo, useState} from "react";
 import {useGetStudentsQuery} from "@/api/students.ts";
+import delete_icon from "@/assets/icons/icon_cross.svg";
+import {ProfileUser} from "@/pages/profile-user/profile-user.tsx";
 
 // const inputs = [
 //     {label: 'Имя', name: 'first_name', type: 'text'},
@@ -10,7 +12,11 @@ import {useGetStudentsQuery} from "@/api/students.ts";
 // ]
 
 export const Students = memo(() => {
-    const {data: students} = useGetStudentsQuery()
+    const {data: students} = useGetStudentsQuery();
+    const [showStudentProfile, setShowStudentProfile] = useState<number | null>(null);
+
+
+    const onClickShowProfile = (data: number | null) => setShowStudentProfile(data)
     // const [clickAddStudent, setClickAddStudent] = useState(false);
 
     // const onClickAddStudent = () => setClickAddStudent(prev => !prev);
@@ -47,19 +53,23 @@ export const Students = memo(() => {
     return (
         <>
             {/*<section className={s.section}>*/}
-                {/*<button onClick={onClickAddStudent}>Добавить ученика</button>*/}
-                <div className={s.card_container}>
-                    {students?.map((item) => {
-                        return (
-                            <Fragment key={item.id}>
-                                <div className={s.card_schedule}>
-                                    <p><strong>Имя:</strong> {item.first_name}</p>
-                                    <p><strong>Фаилия:</strong> {item.last_name}</p>
-                                    <p><strong>Почта:</strong> {item.email}</p>
-                                </div>
-                            </Fragment>)
-                    })}
-                </div>
+            {/*<button onClick={onClickAddStudent}>Добавить ученика</button>*/}
+            <div className={s.card_container}>
+                {students?.map((item) => {
+                    return (
+                        <div className={s.card_schedule} key={item.id} onClick={() => onClickShowProfile(item.id)}>
+                            <p><strong>Имя:</strong> {item.first_name}</p>
+                            <p><strong>Фаилия:</strong> {item.last_name}</p>
+                            <p><strong>Почта:</strong> {item.email}</p>
+                        </div>)
+                })}
+            </div>
+            {showStudentProfile && <div className={s.group_details_overlay}>
+                <button className={s.delete_button} onClick={() => onClickShowProfile(null)}>
+                    <img src={delete_icon} alt={'delete icon'}/>
+                </button>
+                <ProfileUser student_id={showStudentProfile}/>
+            </div>}
             {/*</section>*/}
             {/*{clickAddStudent && <Modal onClickClose={onClickAddStudent}>*/}
             {/*    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>*/}

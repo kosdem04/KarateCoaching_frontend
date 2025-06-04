@@ -6,7 +6,8 @@ import {Modal} from "@/components/modal/modal.tsx";
 import {formatDate} from "@/shared/utils/date.ts";
 import {Events} from "@/api/types-api.ts";
 import delete_icon from "@/assets/icons/icon_cross.svg";
-import {useGetStudentsQuery} from "@/api/students.ts";
+import {useLazyGetEventsStudentsQuery} from "@/api/events.ts";
+import {ProfileUser} from "@/pages/profile-user/profile-user.tsx";
 
 const tableHead = ['Название турнира', 'Тип мероприятия', 'Дата начала', 'Дата окончания'];
 
@@ -17,14 +18,22 @@ interface Props {
 
 export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
     const [updateEvent, setUpdateEvent] = useState(false);
-    const [showStudents, setShowStudents] = useState(false);
-    const {data: students} = useGetStudentsQuery()
+    const [showStudents, setShowStudents] = useState<number | null>(null);
+    const [showStudentProfile, setShowStudentProfile] = useState<number | null>(null);
+    const [trigger, {data: students}] = useLazyGetEventsStudentsQuery();
 
     const onClickUpdateEvent = () => {
         setUpdateEvent(prev => !prev);
     }
 
-    const onClickShowStudents = () => setShowStudents(prev => !prev);
+    const onClickShowProfile = (data: number | null) => setShowStudentProfile(data)
+
+    const onClickShowStudents = (data: number | null) => {
+        if (data) {
+            trigger(data)
+        }
+        setShowStudents(data)
+    };
 
     return (
         <>
@@ -36,9 +45,9 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
                 renderThead={tableHead.map((item, index) => (
                     <th key={index}>{item}</th>
                 ))}
-                renderTbody={events?.map((item, index) => {
-                    return <tr key={index}>
-                        <td onClick={onClickShowStudents} style={{cursor: 'pointer'}}>{item.name}</td>
+                renderTbody={events?.map((item) => {
+                    return <tr key={item.id}>
+                        <td onClick={() => onClickShowStudents(item.id)} style={{cursor: 'pointer'}}>{item.name}</td>
                         <td>{item.type.name}</td>
                         <td>{formatDate(item.date_start)}</td>
                         <td>{formatDate(item.date_end)}</td>
@@ -46,7 +55,7 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
                 })}
             />
             {showStudents && <div className={s.group_details_overlay}>
-                <button className={s.delete_button} onClick={onClickShowStudents}>
+                <button className={s.delete_button} onClick={() => onClickShowStudents(null)}>
                     <img src={delete_icon} alt={'delete icon'}/>
                 </button>
                 <div className={s.group_details_panel}>
@@ -54,7 +63,8 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
                     <div className={s.card_container}>
                         {students?.map((item) => {
                             return (
-                                <div className={s.card_schedule} key={item.id}>
+                                <div className={s.card_schedule} key={item.id}
+                                     onClick={() => onClickShowProfile(item.id)}>
                                     <p><strong>Имя:</strong> {item.first_name}</p>
                                     <p><strong>Фаилия:</strong> {item.last_name}</p>
                                     <p><strong>Почта:</strong> {item.email}</p>
@@ -62,6 +72,12 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
                         })}
                     </div>
                 </div>
+            </div>}
+            {showStudentProfile && <div className={s.group_details_overlay}>
+                <button className={s.delete_button} onClick={() => onClickShowProfile(null)}>
+                    <img src={delete_icon} alt={'delete icon'}/>
+                </button>
+                <ProfileUser student_id={showStudentProfile}/>
             </div>}
             {updateEvent && <Modal onClickClose={onClickUpdateEvent}>
                 <TournamentAddForm onClickClose={onClickUpdateEvent}/>

@@ -1,4 +1,4 @@
-import {CreateEventEvents, Events, EventsTypes} from "@/api/types-api.ts";
+import {CreateEventEvents, Events, EventsTypes, Student} from "@/api/types-api.ts";
 import {events, eventsAdd, eventsTypes} from "@/app/urls.ts";
 import {baseApi} from "@/api/api.ts";
 
@@ -8,6 +8,11 @@ export const eventsApi = baseApi.injectEndpoints({
             query: () => events,
             transformResponse: (response: Events[]) => response,
             providesTags: ["events-types"],
+        }),
+        getEventsStudents: build.query<Student[], number>({
+            query: (student_id: number) => `${events}${student_id}/students`,
+            transformResponse: (response: Student[]) => response,
+            // providesTags: ["events-types"],
         }),
         getEventsTypes: build.query<EventsTypes[], void>({
             query: () => eventsTypes,
@@ -29,4 +34,4 @@ export const eventsApi = baseApi.injectEndpoints({
         }),
     }),
 });
-export const {useGetEventsQuery, useGetEventsTypesQuery, useAddEventMutation} = eventsApi;
+export const {useGetEventsQuery, useGetEventsTypesQuery, useAddEventMutation, useLazyGetEventsStudentsQuery} = eventsApi;
