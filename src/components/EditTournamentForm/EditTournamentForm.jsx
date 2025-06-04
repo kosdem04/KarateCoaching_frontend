@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import './EditTournamentForm.css';
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 import DeleteTournamentModal from "../DeleteTournamentModal/DeleteTournamentModal.jsx";
 
 export default function EditTournamentForm() {

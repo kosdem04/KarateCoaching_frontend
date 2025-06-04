@@ -1,0 +1,8 @@
+.title_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.add_event{
+    background-color: #1a1a1a;
+    color: #dddddd;
+}

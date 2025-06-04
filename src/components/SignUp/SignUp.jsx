@@ -1,6 +1,6 @@
 import './SignUp.css';
 import { useState } from "react";
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function SignUp() {

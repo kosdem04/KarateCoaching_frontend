@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AddSportsmanForm.css';
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 import {useNavigate} from "react-router-dom";
 
 export default function AddSportsmanForm() {

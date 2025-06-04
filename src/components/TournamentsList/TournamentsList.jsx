@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import './TournamentsList.css'
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 
-export default function TournamentsList() {
+ const TournamentsList = ()=> {
     const [tournaments, setTournaments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -79,3 +79,4 @@ export default function TournamentsList() {
         </>
     );
 }
+export default TournamentsList;
