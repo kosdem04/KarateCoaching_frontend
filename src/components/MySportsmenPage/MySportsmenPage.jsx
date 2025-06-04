@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Link, useNavigate} from "react-router-dom";
 import AgaevImg from '/src/assets/agaev.jpg'
 import './MySportsmenPage.css'
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 
 
 export default function MySportsmenPage() {

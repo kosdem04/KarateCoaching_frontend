@@ -1,0 +1,15 @@
+export const eventsTypes = '/events/types';
+export const events = 'events/';
+export const eventsAdd = '/events/add';
+export const groups = '/groups/';
+export const groupAdd = '/groups/add';
+export const results = '/results/';
+export const resultAdd = 'results/add';
+export const resultsPlaces = '/results/places/';
+export const students = '/students/';
+export const users = '/users/';
+export const usersUpdate = '/users/update';
+export const authGetUserData = '/auth/get_user_data';
+export const usersPasswordForgot = '/users/password/forgot';
+export const usersPasswordReset = '/users/password/reset';
+export const studentRegisterCoach = '/auth/student/register/coach/';

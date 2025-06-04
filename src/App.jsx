@@ -2,21 +2,21 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import MainPage from "./pages/MainPage/MainPage.jsx";
-import LoginForm from "./components/LoginForm/LoginForm.jsx";
-import SignUp from "./components/SignUp/SignUp.jsx";
+import LoginForm from "./components/LoginForm/login-form.tsx";
+import SignUp from "./components/SignUp/sign-up.tsx";
 import MySportsmenPage from "./components/MySportsmenPage/MySportsmenPage.jsx";
 import ProtectedAuthRoute from "./components/ProtectedAuthRoute.jsx";
 import SportsmanInfo from "./components/SportsmanInfo/SportsmanInfo.jsx";
 import TournamentsList from "./components/TournamentsList/TournamentsList.jsx";
-import TournamentAddForm from "./components/TournamentAddForm/TournamentAddForm.jsx";
-import AddResultForm from "./components/AddResultForm/AddResultForm.jsx";
+import TournamentAddForm from "./components/tournament-add-form/tournament-add-form.tsx";
+import AddResultForm from "./components/AddResultForm/add-result-form.tsx";
 import AddSportsmanForm from "./components/AddSportsmanForm/AddSportsmanForm.jsx";
 import EditSportsmanForm from "./components/EditSportsmanForm/EditSportsmanForm.jsx";
-import ResultList from "./components/ResultList/ResultList.jsx";
+import {ResultList} from "./components/ResultList/result-list.tsx";
 import EditResultForm from "./components/EditResultForm/EditResultForm.jsx";
 import EditTournamentForm from "./components/EditTournamentForm/EditTournamentForm.jsx";
-import CoachProfile from "./pages/Coaches/CoachProfile/CoachProfile.jsx";
-import {Profile} from "./pages/profile/profile.js";
+import CoachProfile from "./pages/Coaches/coach-profile/coach-profile.jsx";
+import {ProfileUser} from "./pages/profile-user/profile-user.tsx";
 
 function App() {
     return (
@@ -29,7 +29,7 @@ function App() {
                         <Route path="/login" element={<LoginForm />} />
                         <Route path="/sign_up" element={<SignUp />} />
                         <Route path="/coach_profile" element={<CoachProfile />} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/profile/:id" element={<ProfileUser />} />
                         <Route
                             path="/my_sportsmen"
                             element={

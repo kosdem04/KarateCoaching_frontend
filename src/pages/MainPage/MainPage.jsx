@@ -1,8 +1,8 @@
-import { useAuth } from "../../AuthContext.jsx";
+import { useAuth } from "../../auth-context.tsx";
 import { useNavigate } from "react-router-dom";
 import './MainPage.css';
 import {useEffect, useState} from "react";
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 
 function MainPage() {
     const { isAuthenticated } = useAuth();

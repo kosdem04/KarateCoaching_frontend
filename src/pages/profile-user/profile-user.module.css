@@ -1,0 +1,17 @@
+.profile {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: none;
+}
+
+.buttons_wrapper{
+    display: flex;
+    margin: 20px auto 0;
+    gap: 16px;
+    justify-content: center;
+}
+.button{
+    background-color: #1a1a1a;
+    color: #fff;
+}

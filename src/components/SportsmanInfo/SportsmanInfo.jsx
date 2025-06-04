@@ -1,7 +1,7 @@
 import './SportsmanInfo.css'
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import React, {useEffect, useState} from "react";
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 import DeleteSportsmanModal from "../DeleteSportsmanModal/DeleteSportsmanModal.jsx";
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer

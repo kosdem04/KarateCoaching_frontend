@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './EditSportsmanForm.css';
-import api from "../../api/axios.js";
+import api from "../../api/axios.ts";
 
 export default function EditSportsmanForm() {
     const { id } = useParams();
