@@ -1,15 +1,16 @@
 import {FC, Fragment, memo, useState} from "react";
 import {Link} from "react-router-dom";
-import {useGetResultsQuery} from "../../../../api/results.ts";
+import {useGetResultsStudentQuery} from "../../../../api/students.ts";
 
 interface Props {
     pageStudent?: boolean;
+    studentId: number;
 }
 
-export const ResultsStudent: FC<Props> = memo(({pageStudent}) => {
+export const ResultsStudent: FC<Props> = memo(({pageStudent, studentId}) => {
     const [expandedTournamentId, setExpandedTournamentId] = useState<null | number>(null);
-    // const {data: results} = useGetResultsStudentQuery(studentId);
-    const {data: results} = useGetResultsQuery();
+    const {data: results} = useGetResultsStudentQuery(studentId);
+    // const {data: results} = useGetResultsQuery();
 
     const toggleExpand = (id: number) => {
         setExpandedTournamentId(prev => (prev === id ? null : id));

@@ -7,7 +7,7 @@ import {useAuth} from "../../auth-context.js";
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const {pathname} = useLocation();
-    const {isAuthenticated, logout} = useAuth();
+    const {logout} = useAuth();
     const role = localStorage.getItem("role");
 
     // Закрытие меню при смене страницы
@@ -20,16 +20,7 @@ export default function Header() {
         <header className="static-header">
             <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>☰</div>
             <nav className={`nav-links ${menuOpen ? 'active' : ''}`}>
-                {isAuthenticated ? (
-                    <>
-                        <Link to="/my_sportsmen/">Мои спортсмены</Link>
-                        <Link to="/my_tournaments/">Турниры</Link>
-                        <Link to="/my_results/">Результаты</Link>
                         <button onClick={logout} className="logout-button">Выйти</button>
-                    </>
-                ) : (
-                    <Link to="/login/">Войти</Link>
-                )}
             </nav>
             <div className="logo"><Link to={role === 'coach' ? '/coach_profile' :'/profile'}>Тренерская</Link></div>
         </header>

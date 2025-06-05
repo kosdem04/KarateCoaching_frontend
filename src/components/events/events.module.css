@@ -1,6 +1,7 @@
 .title_wrapper{
     display: flex;
     justify-content: space-between;
+    margin-top: 16px;
 }
 .add_event{
     background-color: #1a1a1a;
@@ -51,6 +52,22 @@
     padding: 24px;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+}
+.select{
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+}
+.title_wrapper{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+.select_wrapper{
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 @keyframes slideInFromRight {
     from {

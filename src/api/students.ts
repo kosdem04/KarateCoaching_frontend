@@ -1,12 +1,18 @@
 import {baseApi} from "./api.ts";
 import {students} from "../app/urls.ts";
-import {Events, ResultsStudent, Student, StudentAdd, StudentProfile, UserProfileUpdate} from "./types-api.ts";
+import {
+    Events, Results,
+    StudentAdd,
+    StudentData,
+    StudentProfile,
+    UserProfileUpdate
+} from "./types-api.ts";
 
 export const studentsApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getStudents: build.query<Student[], void>({
+        getStudents: build.query<StudentData[], void>({
             query: () => students,
-            transformResponse: (response: Student[]) => response,
+            transformResponse: (response: StudentData[]) => response,
             providesTags: ["students"],
         }),
         getStudentProfile: build.query<StudentProfile, number>({
@@ -19,9 +25,9 @@ export const studentsApi = baseApi.injectEndpoints({
             transformResponse: (response: Events[]) => response,
             providesTags: ["events-students"],
         }),
-        getResultsStudent: build.query<ResultsStudent[], number>({
+        getResultsStudent: build.query<Results[], number>({
             query: (id: number) => `${students}${id}/results`,
-            transformResponse: (response: ResultsStudent[]) => response,
+            transformResponse: (response: Results[]) => response,
             providesTags: ["results-students"],
         }),
         studentAdd: build.mutation({

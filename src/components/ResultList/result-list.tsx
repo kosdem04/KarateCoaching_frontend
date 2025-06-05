@@ -70,7 +70,7 @@ export function ResultList() {
                                                 {tournament.results.map((res, idx) => (
                                                     <tr key={idx}
                                                         onClick={() => navigate(`/my_results/${res.id}/edit`)}>
-                                                        <td>{res.student.student_data.last_name}
+                                                        <td>{res.student.student_data.last_name}{' '}
                                                             {res.student.student_data.first_name.charAt(0)}.
                                                             {res.student.student_data.patronymic ? res.student.student_data.patronymic.charAt(0) + '.' : ''}</td>
                                                         <td>{res.place.name}</td>

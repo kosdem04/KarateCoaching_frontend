@@ -2,7 +2,7 @@ import {FC, memo, useEffect, useState} from "react";
 import s from "./table-visited.module.css";
 import {dates, DayWeek, Participant, updateParticipantAttendance} from "./constants.ts";
 import delete_icon from '../../../assets/icons/icon_cross.svg';
-import {useGetStudentsInGroupQuery} from "../../../api/groups.ts";
+import {useDeleteStudentGroupMutation, useGetStudentsInGroupQuery} from "../../../api/groups.ts";
 import {Table} from "../../table/table.tsx";
 import {DescriptionsVisits} from "../descriptions-visits/descriptions-visits.tsx";
 
@@ -14,6 +14,7 @@ interface Props {
 export const TableVisited: FC<Props> = memo(({groupId, openStudentInfo}) => {
     const [participants, setParticipants] = useState<Participant[]>([]);
     const {data: students} = useGetStudentsInGroupQuery(groupId);
+    const [deleteStudent] = useDeleteStudentGroupMutation()
 
     useEffect(() => {
         if (students) {
@@ -42,8 +43,7 @@ export const TableVisited: FC<Props> = memo(({groupId, openStudentInfo}) => {
     };
 
     const deleteVisited = (id: number) => {
-        const participantVisited: Participant[] = participants.filter(item => item.id !== id);
-        setParticipants(participantVisited)
+        deleteStudent({group_id: groupId, student_id: id})
     }
 
     return (
@@ -66,7 +66,7 @@ export const TableVisited: FC<Props> = memo(({groupId, openStudentInfo}) => {
                 renderTbody={participants?.map((item) => (
                     <tr key={item.id}>
                         <td className={s.name_users}>
-                            <h4 onClick={()=>openStudentInfo(item.id)}>{item.name}</h4>
+                            <h4 onClick={() => openStudentInfo(item.id)}>{item.name}</h4>
                             <button className={s.button_delete} onClick={() => deleteVisited(item.id)}>
                                 <img src={delete_icon} alt="delete icon"/>
                             </button>
