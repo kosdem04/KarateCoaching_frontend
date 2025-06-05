@@ -36,9 +36,10 @@ export interface UserInfo {
 interface Props {
     user: UserInfo;
     refetch: () => void;
+    idCouch?: boolean;
 }
 
-export const Profile: FC<Props> = memo(({user, refetch}) => {
+export const Profile: FC<Props> = memo(({user, refetch, idCouch}) => {
     const [showModal, setShowModal] = useState(false);
     // const [updateProfile] = useUpdateUserMutation();
 
@@ -128,6 +129,9 @@ export const Profile: FC<Props> = memo(({user, refetch}) => {
                     </p>
                     {user.phone_number && <p>
                         <strong>Номер телефона:</strong> {user.phone_number}
+                    </p>}
+                    {idCouch && <p>
+                        <strong>Ссылка для регистрации:</strong> https://karate-coaching.ru/sign_up?couch_id={user.id}
                     </p>}
                 </div>
             </section>

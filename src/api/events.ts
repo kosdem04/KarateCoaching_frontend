@@ -13,7 +13,7 @@ export const eventsApi = baseApi.injectEndpoints({
         getEventsStudents: build.query<Student[], number>({
             query: (student_id: number) => `${events}${student_id}/students`,
             transformResponse: (response: Student[]) => response,
-            // providesTags: ["events-types"],
+            providesTags: ["events-students"],
         }),
         getEventsTypes: build.query<EventsTypes[], void>({
             query: () => eventsTypes,
@@ -33,6 +33,13 @@ export const eventsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["events-types"],
         }),
+        addStudentEvent: build.mutation({
+            query:({event_id, student_id}: { event_id: number, student_id: number }) => ({
+                url: `/${events}${event_id}/${student_id}`,
+                method: "POST",
+            }),
+            invalidatesTags: ["events-students"],
+        }),
     }),
 });
-export const {useGetEventsQuery, useGetEventsTypesQuery, useAddEventMutation, useLazyGetEventsStudentsQuery} = eventsApi;
+export const {useGetEventsQuery, useGetEventsTypesQuery, useAddEventMutation, useLazyGetEventsStudentsQuery, useAddStudentEventMutation} = eventsApi;

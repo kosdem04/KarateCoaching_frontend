@@ -36,6 +36,16 @@ export interface Student {
     phone_number: string | null;
 }
 
+export interface StudentData {
+    student_data: Student;
+    coach_id: number;
+    group: {
+        id: number;
+        name: string;
+        coach_id: number;
+    } | null;
+}
+
 export interface StudentProfile {
     student_data: {
         id: 0,

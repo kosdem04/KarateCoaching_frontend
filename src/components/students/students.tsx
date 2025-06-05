@@ -56,10 +56,11 @@ export const Students = memo(() => {
             <div className={s.card_container}>
                 {students?.map((item) => {
                     return (
-                        <div className={s.card_schedule} key={item.id} onClick={() => onClickShowProfile(item.id)}>
-                            <p><strong>Имя:</strong> {item.first_name}</p>
-                            <p><strong>Фаилия:</strong> {item.last_name}</p>
-                            <p><strong>Почта:</strong> {item.email}</p>
+                        <div className={s.card_schedule} key={item.student_data.id} onClick={() => onClickShowProfile(item.student_data.id)}>
+                            <p><strong>Имя:</strong> {item.student_data.first_name}</p>
+                            <p><strong>Фаилия:</strong> {item.student_data.last_name}</p>
+                            <p><strong>Почта:</strong> {item.student_data.email}</p>
+                            {item.group && <p><strong>Группа:</strong> {item.group.name}</p>}
                         </div>)
                 })}
             </div>

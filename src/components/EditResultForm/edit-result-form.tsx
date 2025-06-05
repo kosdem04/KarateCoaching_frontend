@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import './EditResultForm.css';
 import api from "../../api/axios.ts";
 import DeleteResultModal from "../DeleteResultModal/delete-result-modal.tsx";
 import {useGetStudentsQuery} from "../../api/students.ts";
-import {useGetEventsTypesQuery} from "../../api/events.ts";
+import {useGetEventsQuery} from "../../api/events.ts";
 import {useGetResultsPlacesQuery} from "../../api/results.ts";
 
 interface Form {
-    tournament_id: string
-    sportsman_id: string
+    event_id: string
+    student_id: string
     place_id: string
     points_scored: string
     points_missed: string
@@ -19,23 +19,23 @@ interface Form {
 export default function EditResultForm() {
     const { id } = useParams(); // id результата
     const {data: sportsmen} = useGetStudentsQuery()
-    const {data: tournaments} = useGetEventsTypesQuery()
+    const {data: tournaments} = useGetEventsQuery()
     const {data: places} = useGetResultsPlacesQuery()
     // const [sportsmen, setSportsmen] = useState([]);
     const [message, setMessage] = useState({ text: '', type: '' });
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = useState<Form>({
-        tournament_id: '',
-        sportsman_id: '',
+        event_id: '',
+        student_id: '',
         place_id: '',
         points_scored: '',
         points_missed: '',
         number_of_fights: ''
     });
     const [originalData, setOriginalData] = useState<Form>({
-        tournament_id: '0',
-        sportsman_id: '0',
+        event_id: '0',
+        student_id: '0',
         place_id: '0',
         points_scored: '0',
         points_missed: '0',
@@ -108,7 +108,7 @@ export default function EditResultForm() {
                     Соревнование:
                     <select
                         name="tournament_id"
-                        value={formData.tournament_id}
+                        value={formData.event_id || originalData.event_id}
                         onChange={handleChange}
                         required
                     >
@@ -123,13 +123,13 @@ export default function EditResultForm() {
                     Спортсмен:
                     <select
                         name="sportsman_id"
-                        value={formData.sportsman_id}
+                        value={formData.student_id || originalData.student_id}
                         onChange={handleChange}
                         required
                     >
                         <option value="">Выберите...</option>
                         {sportsmen?.map(s => (
-                            <option key={s.id} value={s.id}>{s.last_name} {s.first_name}</option>
+                            <option key={s.student_data.id} value={s.student_data.id}>{s.student_data.last_name} {s.student_data.first_name}</option>
                         ))}
                     </select>
                 </label>

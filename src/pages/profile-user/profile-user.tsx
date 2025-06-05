@@ -54,7 +54,7 @@ export const ProfileUser:FC<Props> = memo(({student_id}) => {
             </div>
             {listActive === buttons[0].id && <Schedules/>}
             {listActive === buttons[1].id && <EventsProfile studentId={student_id || +studentId}/>}
-            {listActive === buttons[2].id && <ResultsStudent pageStudent={true}/>}
+            {listActive === buttons[2].id && <ResultsStudent pageStudent={true} studentId={student_id || +studentId}/>}
         </section>
     );
 });

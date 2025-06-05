@@ -12,7 +12,7 @@ export const groupsApi = baseApi.injectEndpoints({
         getStudentsInGroup: build.query<Student[], number>({
             query: (id: number) => `${groups}${id}/students`,
             transformResponse: (response: Student[]) => response,
-            // providesTags: ["groups"],
+            providesTags: ["student-in-groups"],
         }),
         deleteGroup: build.mutation({
             query: (id: number) => ({
@@ -30,7 +30,24 @@ export const groupsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["groups"],
         }),
+        addStudentGroup: build.mutation({
+            query: ({group_id, student_id}: { group_id: number, student_id: number }) => ({
+                url: `${groups}/${group_id}/add_student/${student_id}`,
+                method: "POST",
+                body: {},
+            }),
+            invalidatesTags: ["student-in-groups", 'students'],
+        }),
+        deleteStudentGroup: build.mutation({
+            query: ({group_id, student_id}: { group_id: number, student_id: number }) => ({
+                url: `${groups}/${group_id}/add_student/${student_id}`,
+                method: "DELETE",
+                body: {},
+            }),
+            invalidatesTags: ["student-in-groups", 'students'],
+        }),
     }),
 });
 
-export const {useGetGroupsQuery, useDeleteGroupMutation, useCreateGroupMutation, useGetStudentsInGroupQuery} = groupsApi
+export const {useGetGroupsQuery, useDeleteGroupMutation, useCreateGroupMutation, useGetStudentsInGroupQuery, useAddStudentGroupMutation,
+    useDeleteStudentGroupMutation} = groupsApi

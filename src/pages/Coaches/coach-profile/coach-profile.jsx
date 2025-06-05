@@ -63,7 +63,7 @@ export default function CoachProfile() {
 
     return (
         <div className="profile-container">
-            {isAuthenticated && <Profile refetch={refetch} user={useData}/>}
+            {isAuthenticated && <Profile refetch={refetch} user={useData} idCouch={true}/>}
             <div className="profile-menu">
                 {menuItems.map(item => (
                     <button

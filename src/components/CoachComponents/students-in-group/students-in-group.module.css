@@ -57,7 +57,22 @@
     cursor: pointer;
     border-bottom: 1px solid #eee;
 }
-
+.select{
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+}
+.title_wrapper{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+.select_wrapper{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
 @keyframes slideInFromRight {
     from {
         transform: translateX(100%);
