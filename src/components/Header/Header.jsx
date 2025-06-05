@@ -9,7 +9,9 @@ export default function Header() {
     const {pathname} = useLocation();
     const {logout} = useAuth();
     const role = localStorage.getItem("role");
-
+    const token = localStorage.getItem("token");
+    const link = role ? (role === 'coach' ? '/coach_profile' : '/profile') : '/'
+    console.log(role)
     // Закрытие меню при смене страницы
     useEffect(() => {
         setMenuOpen(false);
@@ -20,9 +22,11 @@ export default function Header() {
         <header className="static-header">
             <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>☰</div>
             <nav className={`nav-links ${menuOpen ? 'active' : ''}`}>
-                        <button onClick={logout} className="logout-button">Выйти</button>
+                {token
+                    ? <button onClick={logout} className="logout-button">Выйти</button>
+                    : <Link to="/login">Войти</Link>}
             </nav>
-            <div className="logo"><Link to={role === 'coach' ? '/coach_profile' :'/profile'}>Тренерская</Link></div>
+            <div className="logo"><Link to={link}>Тренерская</Link></div>
         </header>
     );
 }
