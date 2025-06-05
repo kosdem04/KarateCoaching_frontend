@@ -2,8 +2,8 @@ import './SignUp.css';
 import {useState} from "react";
 import api from "../../api/axios.ts";
 import {Link, useNavigate, useSearchParams} from "react-router-dom";
-import {useStudentRegisterCoachMutation} from "@/api/auth.js";
 import {useForm} from "react-hook-form";
+import {useStudentRegisterCoachMutation} from "../../api/auth.ts";
 
 const inputsRegister = [
     {name: "first_name", label: 'Фамилия:', type: "text", required: true},

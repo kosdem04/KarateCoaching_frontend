@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import s from './tournament-add-form.module.css';
 import {useForm} from "react-hook-form";
-import {useAddEventMutation, useGetEventsTypesQuery} from "@/api/events.ts";
+import {useAddEventMutation, useGetEventsTypesQuery} from "../../api/events.ts";
 
 interface Props {
     onClickClose: () => void;

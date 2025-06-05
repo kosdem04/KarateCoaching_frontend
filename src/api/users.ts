@@ -1,6 +1,7 @@
-import {baseApi} from "@/api/api.ts";
-import {Student, UserProfileUpdate} from "@/api/types-api.ts";
-import {users, usersUpdate} from "@/app/urls.ts";
+import {baseApi} from "./api.ts";
+import {Student, UserProfileUpdate} from "./types-api.ts";
+import {users, usersUpdate} from "../app/urls.ts";
+
 
 export const usersApi = baseApi.injectEndpoints({
     endpoints: (build) => ({

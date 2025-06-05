@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useState} from "react";
-import delete_icon from '@/assets/icons/icon_cross.svg';
+import delete_icon from '../../assets/icons/icon_cross.svg';
 import s from "./coach-groups.module.css";
-import StudentsInGroup from "@/components/CoachComponents/students-in-group/students-in-group.tsx";
-import {useCreateGroupMutation, useDeleteGroupMutation, useGetGroupsQuery} from "@/api/groups.ts";
+import {useCreateGroupMutation, useDeleteGroupMutation, useGetGroupsQuery} from "../../api/groups.ts";
+import StudentsInGroup from "./students-in-group/students-in-group.tsx";
 
 export default function CoachGroups() {
     const [newGroup, setNewGroup] = useState<string>('');

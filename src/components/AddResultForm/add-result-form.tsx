@@ -1,8 +1,8 @@
 import './AddResultForm.css';
 import {useForm} from "react-hook-form";
-import {useGetEventsQuery} from '@/api/events';
-import {useGetStudentsQuery} from "@/api/students.ts";
-import {useAddResultMutation, useGetResultsPlacesQuery} from "@/api/results.ts";
+import {useGetEventsQuery} from "../../api/events.ts";
+import {useGetStudentsQuery} from "../../api/students.ts";
+import {useAddResultMutation, useGetResultsPlacesQuery} from "../../api/results.ts";
 
 const inputs = [
     {name: 'points_scored', label: 'Количество заработанных баллов:'},

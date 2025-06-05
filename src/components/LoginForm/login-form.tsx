@@ -4,7 +4,7 @@ import api from "../../api/axios.ts";
 import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../../auth-context.tsx";
 import {useForm} from "react-hook-form";
-import {useForgotPasswordMutation, useResetPasswordMutation} from "@/api/auth.ts";
+import {useForgotPasswordMutation, useResetPasswordMutation} from "../../api/auth.ts";
 
 const inputsLogin = [
     {name: "email", label: "Email:", type: "email"},

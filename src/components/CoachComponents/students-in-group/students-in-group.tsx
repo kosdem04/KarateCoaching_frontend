@@ -1,8 +1,8 @@
 import {useState} from "react";
 import s from "./students-in-group.module.css";
-import {TableVisited} from "@/components/visited/table-visited/table-visited.js";
-import delete_icon from "@/assets/icons/icon_cross.svg";
-import {ProfileUser} from "@/pages/profile-user/profile-user.tsx";
+import delete_icon from "../../../assets/icons/icon_cross.svg";
+import {TableVisited} from "../../visited/table-visited/table-visited.tsx";
+import {ProfileUser} from "../../../pages/profile-user/profile-user.tsx";
 
 interface Props {
     groupId: number;

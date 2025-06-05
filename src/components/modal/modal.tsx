@@ -1,6 +1,6 @@
 import {FC, memo, ReactNode} from 'react';
 import s from './modal.module.css';
-import close_icon from '@/assets/icons/icon_cross.svg';
+import close_icon from '../../assets/icons/icon_cross.svg';
 
 interface Props {
     children: ReactNode;
