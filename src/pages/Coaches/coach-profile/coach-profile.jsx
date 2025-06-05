@@ -4,6 +4,11 @@ import CoachGroups from "../../../components/CoachComponents/coach-groups.js";
 import {useAuth} from "../../../auth-context.js";
 import {useGetEventsQuery} from "../../../api/events.js";
 import {useGetUserDataQuery} from "../../../api/auth.js";
+import {EventsStudent} from "../../../components/events/events.js";
+import {ResultList} from "../../../components/ResultList/result-list.js";
+import {Schedules} from "../../../pages/profile-user/components/schedules/schedules.js";
+import {Students} from "../../../components/students/students.js";
+import {Profile} from "../../../components/profile/profile.js";
 
 const menuItems = [
     {id: "groups", label: "Группы"},
