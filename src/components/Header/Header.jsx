@@ -2,12 +2,13 @@ import {useState, useEffect} from 'react';
 import './Header.css';
 import {useLocation} from 'react-router-dom';
 import {Link} from "react-router-dom";
-import {useAuth} from "../../auth-context.tsx";
+import {useAuth} from "@/auth-context.js";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const {pathname} = useLocation();
     const {isAuthenticated, logout} = useAuth();
+    const role = localStorage.getItem("role");
 
     // Закрытие меню при смене страницы
     useEffect(() => {
@@ -30,7 +31,7 @@ export default function Header() {
                     <Link to="/login/">Войти</Link>
                 )}
             </nav>
-            <div className="logo"><Link to="/">Тренерская</Link></div>
+            <div className="logo"><Link to={role === 'coach' ? '/coach_profile' :'/profile'}>Тренерская</Link></div>
         </header>
     );
 }

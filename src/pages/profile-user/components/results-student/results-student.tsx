@@ -16,7 +16,7 @@ export const ResultsStudent: FC<Props> = memo(({pageStudent}) => {
     };
 
     return <div className="content">
-        {pageStudent && <div className="profile-header">
+        {!pageStudent && <div className="profile-header">
             <div className="profile-actions">
                 <Link to={`/my_results/add`}>
                     <button className="add-btn">

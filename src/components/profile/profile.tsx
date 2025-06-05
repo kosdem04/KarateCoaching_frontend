@@ -3,8 +3,8 @@ import {FC, memo, useState} from "react";
 import avatar from '@/assets/agaev.jpg';
 import {Modal} from "@/components/modal/modal.tsx";
 import {useForm} from "react-hook-form";
-import {UserProfileUpdate} from "@/api/types-api.ts";
-import {useUpdateUserMutation} from "@/api/users.ts";
+import api from "@/api/axios.ts";
+import {usersUpdate} from "@/app/urls.ts";
 
 interface Form {
     name: "first_name" | "last_name" | "sur_name" | 'date_of_birth' | 'phone_number' | 'password_repeat' | 'password';
@@ -17,7 +17,7 @@ const form: Form[] = [
     {name: 'last_name', label: 'Имя', type_input: 'text'},
     {name: 'sur_name', label: 'Отчество', type_input: 'text'},
     {name: 'password', label: 'Введите пароль:', type_input: 'password'},
-    {name: 'password_repeat', label: 'Повторите пароль:', type_input: 'password_repeat'},
+    {name: 'password_repeat', label: 'Повторите пароль:', type_input: 'password'},
     {name: 'phone_number', label: 'Номер телефона', type_input: 'number'},
     {name: 'date_of_birth', label: 'Дата рождения', type_input: 'date'},
 ]
@@ -40,7 +40,7 @@ interface Props {
 
 export const Profile: FC<Props> = memo(({user, refetch}) => {
     const [showModal, setShowModal] = useState(false);
-    const [updateProfile] = useUpdateUserMutation();
+    // const [updateProfile] = useUpdateUserMutation();
 
     const {register, handleSubmit, setValue} = useForm();
     const onClickModal = () => {
@@ -56,35 +56,51 @@ export const Profile: FC<Props> = memo(({user, refetch}) => {
     const onChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            const params: UserProfileUpdate = {
-                date_of_birth: null,
-                phone_number: null,
-                avatar: URL.createObjectURL(file) || null,
-                last_name: null,
-                patronymic: null,
-                password: null,
-                password_repeat: null,
-                first_name: null,
-            }
-            updateProfile({id: user.id, params}).unwrap().then(() => refetch())
+            const formData = new FormData();
+            formData.append('avatar', file);
+            api.patch(`${usersUpdate}/${user.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(() => {
+                // setShowModal(prev => !prev);
+                refetch()
+            })
+            // updateProfile({id: user.id, formData}).unwrap().then(() => refetch())
         }
     };
 
     const onSubmit = (data: any) => {
-
-        const params: UserProfileUpdate = {
-            date_of_birth: data.date_of_birth || null,
-            avatar: null,
-            phone_number: data.phone_number || null,
-            last_name: data.last_name || null,
+        const formData = new FormData();
+        const params: any = {
+            date_of_birth: data.date_of_birth,
+            phone_number: data.phone_number,
+            last_name: data.last_name,
             password: data.password || null,
             password_repeat: data.password_repeat || null,
-            patronymic: data.sur_name || null,
-            first_name: data.first_name || null,
+            patronymic: data.sur_name,
+            first_name: data.first_name,
+        };
+
+        for (const key in params) {
+            // @ts-ignore
+            if (params[key] !== undefined && params[key] !== '') {
+                // @ts-ignore
+                formData.append(key, params[key] as string);
+            }
         }
-        updateProfile({id: user.id, params}).unwrap().then(() => refetch())
-        setShowModal(prev => !prev)
-    }
+        api.patch(`${usersUpdate}/${user.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(() => {
+                setShowModal(prev => !prev);
+                refetch()
+            })
+        // Вызов mutation с FormData
+        // updateProfile({id: user.id, formData}).unwrap().then(() => refetch());
+        // setShowModal(prev => !prev);
+    };
 
     return (
         <>

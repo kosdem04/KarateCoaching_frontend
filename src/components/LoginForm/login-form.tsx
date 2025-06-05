@@ -34,8 +34,8 @@ export default function LoginForm() {
 
         try {
             const response = await api.post("auth/login", {
-                email: data.email,
-                password: data.password,
+                email: data.email.trim(),
+                password: data.password.trim(),
             });
 
             const token = response.data.access_token;
@@ -66,7 +66,7 @@ export default function LoginForm() {
             setError('Пароли не совпадают')
         }
     };
-
+    console.log(userRoles)
     useEffect(() => {
         console.log('@@@@', userRoles);
         if (!userRoles) return;
@@ -76,16 +76,18 @@ export default function LoginForm() {
         // @ts-ignore
         const isCoach = userRoles.some(role => role.role.code === "coach_role");
         // @ts-ignore
-        const isStudent = userRoles.some(role => role.role.code === "student");
+        const isStudent = userRoles.some(role => role.role.code === "student_role");
 
         if (isAdmin) {
             console.log("Пользователь — администратор");
             // navigate("/admin_dashboard"); // если есть такая страница
         } else if (isCoach) {
             console.log("Пользователь — тренер");
+            localStorage.setItem("role", 'coach');
             navigate("/coach_profile");
         } else if (isStudent) {
             console.log("Пользователь — ученик");
+            localStorage.setItem("role", 'student');
             navigate("/profile");
         } else {
             console.log("Нет подходящей роли");

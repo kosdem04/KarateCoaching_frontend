@@ -9,6 +9,7 @@
     border-radius: 12px;
     padding: 16px;
     width: 100%;
+    cursor: pointer;
 }
 .line{
     border-bottom: 1px solid #6c757d;
@@ -16,4 +17,134 @@
     max-width: 400px;
     height: 1px;
     border-radius: 12px;
+}
+.section{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    button{
+        width: fit-content;
+        background-color: #1f1f1f;
+        color: white;
+        padding: 16px;
+    }
+}
+.avatar_wrapper{
+    position: relative;
+    &:hover{
+        .input_file{
+            display: inline-block;
+        }
+    }
+}
+.input_file {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.input_file_btn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    font-size: 14px;
+    vertical-align: middle;
+    color: rgb(255 255 255);
+    text-align: center;
+    border-radius: 4px;
+    background-color: #656565;
+    line-height: 22px;
+    height: 40px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    transition: background-color 0.2s;
+}
+.input_file_text {
+    padding: 0 10px;
+    line-height: 40px;
+    display: inline-block;
+}
+.input_file input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+/* Hover/active */
+.input_file:hover .input_file_btn {
+    background-color: #262626;
+}
+
+/* Disabled */
+.input_file input[type=file]:disabled + .input_file_btn {
+    background-color: #eee;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.input_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.input{
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+.avatar_wrapper{
+    position: relative;
+    &:hover{
+        .input_file{
+            display: inline-block;
+        }
+    }
+}
+.avatar{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.group_details_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    z-index: 2000;
+    animation: slideInFromRight 0.3s ease forwards;
+}
+
+.delete_button {
+    width: 20%;
+    background-color: rgba(0, 0, 0, 0.1); /* прозрачность */
+    cursor: pointer;
+    position: relative;
+    display: flex;
+
+    img {
+        height: 22px;
+        width: 22px;
+        background-color: transparent;
+    }
+}
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
