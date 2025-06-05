@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import './Header.css';
 import {useLocation} from 'react-router-dom';
 import {Link} from "react-router-dom";
-import {useAuth} from "@/auth-context.js";
+import {useAuth} from "../../auth-context.js";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);

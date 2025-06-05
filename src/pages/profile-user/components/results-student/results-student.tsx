@@ -1,6 +1,6 @@
 import {FC, Fragment, memo, useState} from "react";
 import {Link} from "react-router-dom";
-import {useGetResultsQuery} from "@/api/results.ts";
+import {useGetResultsQuery} from "../../../../api/results.ts";
 
 interface Props {
     pageStudent?: boolean;

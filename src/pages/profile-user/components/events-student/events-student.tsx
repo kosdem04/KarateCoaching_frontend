@@ -1,6 +1,6 @@
 import {FC, memo} from "react";
-import {useGetEventsStudentQuery} from "@/api/students.ts";
-import {EventsStudent} from "@/components/events/events.tsx";
+import {useGetEventsStudentQuery} from "../../../../api/students.ts";
+import {EventsStudent} from "../../../../components/events/events.tsx";
 
 interface Props {
     studentId: number;

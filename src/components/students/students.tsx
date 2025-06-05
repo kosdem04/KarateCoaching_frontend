@@ -1,9 +1,8 @@
 import s from './students.module.css';
 import {memo, useState} from "react";
-import {useGetStudentsQuery} from "@/api/students.ts";
-import delete_icon from "@/assets/icons/icon_cross.svg";
-import {ProfileUser} from "@/pages/profile-user/profile-user.tsx";
-
+import delete_icon from "../../assets/icons/icon_cross.svg";
+import {useGetStudentsQuery} from "../../api/students.ts";
+import {ProfileUser} from "../../pages/profile-user/profile-user.tsx";
 // const inputs = [
 //     {label: 'Имя', name: 'first_name', type: 'text'},
 //     {label: 'Фамилия', name: 'last_name', type: 'text'},

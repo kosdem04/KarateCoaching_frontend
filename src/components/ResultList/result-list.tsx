@@ -2,8 +2,8 @@ import {Fragment, useState} from 'react';
 import './ResultList.css';
 import {Link, useNavigate} from "react-router-dom";
 import {useMediaQuery} from "react-responsive";
-import {CardMobile} from "@/components/card-mobile/card-mobile.js";
-import {useGetResultsQuery} from "@/api/results.js";
+import {useGetResultsQuery} from "../../api/results.ts";
+import {CardMobile} from "../card-mobile/card-mobile.tsx";
 
 export function ResultList() {
     const [expandedTournamentId, setExpandedTournamentId] = useState<null | number>(null);

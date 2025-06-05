@@ -3,9 +3,9 @@ import {useNavigate, useParams} from 'react-router-dom';
 import './EditResultForm.css';
 import api from "../../api/axios.ts";
 import DeleteResultModal from "../DeleteResultModal/delete-result-modal.tsx";
-import {useGetStudentsQuery} from "@/api/students.ts";
-import {useGetEventsTypesQuery} from "@/api/events.ts";
-import {useGetResultsPlacesQuery} from "@/api/results.ts";
+import {useGetStudentsQuery} from "../../api/students.ts";
+import {useGetEventsTypesQuery} from "../../api/events.ts";
+import {useGetResultsPlacesQuery} from "../../api/results.ts";
 
 interface Form {
     tournament_id: string

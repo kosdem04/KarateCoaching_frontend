@@ -1,13 +1,13 @@
 import s from './events.module.css'
 import {Table} from "../table/table";
 import {FC, memo, useState} from "react";
-import TournamentAddForm from "@/components/tournament-add-form/tournament-add-form.tsx";
-import {Modal} from "@/components/modal/modal.tsx";
-import {formatDate} from "@/shared/utils/date.ts";
-import {Events} from "@/api/types-api.ts";
-import delete_icon from "@/assets/icons/icon_cross.svg";
-import {useLazyGetEventsStudentsQuery} from "@/api/events.ts";
-import {ProfileUser} from "@/pages/profile-user/profile-user.tsx";
+import delete_icon from "../../assets/icons/icon_cross.svg";
+import {Events} from "../../api/types-api.ts";
+import {useLazyGetEventsStudentsQuery} from "../../api/events.ts";
+import {formatDate} from "../../shared/utils/date.ts";
+import {ProfileUser} from "../../pages/profile-user/profile-user.tsx";
+import TournamentAddForm from "../tournament-add-form/tournament-add-form.tsx";
+import {Modal} from "../modal/modal.tsx";
 
 const tableHead = ['Название турнира', 'Тип мероприятия', 'Дата начала', 'Дата окончания'];
 

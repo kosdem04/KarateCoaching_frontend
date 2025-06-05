@@ -1,10 +1,10 @@
 import s from './profile.module.css';
 import {FC, memo, useState} from "react";
-import avatar from '@/assets/agaev.jpg';
-import {Modal} from "@/components/modal/modal.tsx";
+import avatar from '../../assets/agaev.jpg';
 import {useForm} from "react-hook-form";
-import api from "@/api/axios.ts";
-import {usersUpdate} from "@/app/urls.ts";
+import {usersUpdate} from "../../app/urls.ts";
+import api from "../../api/axios.ts";
+import {Modal} from "../modal/modal.tsx";
 
 interface Form {
     name: "first_name" | "last_name" | "sur_name" | 'date_of_birth' | 'phone_number' | 'password_repeat' | 'password';

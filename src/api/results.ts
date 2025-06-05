@@ -1,6 +1,6 @@
-import {baseApi} from "@/api/api.ts";
-import {ResultAdd, Results, ResultsPlaces} from "@/api/types-api.ts";
-import {resultAdd, results, resultsPlaces} from "@/app/urls.ts";
+import {baseApi} from "./api.ts";
+import {ResultAdd, Results, ResultsPlaces} from "./types-api.ts";
+import {resultAdd, results, resultsPlaces} from "../app/urls.ts";
 
 export const resultsApi = baseApi.injectEndpoints({
     endpoints: (build) => ({

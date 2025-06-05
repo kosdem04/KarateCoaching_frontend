@@ -1,10 +1,10 @@
 import {FC, memo, useEffect, useState} from "react";
 import s from "./table-visited.module.css";
-import {Table} from "@/components/table/table.tsx";
 import {dates, DayWeek, Participant, updateParticipantAttendance} from "./constants.ts";
-import {DescriptionsVisits} from "@/components/visited/descriptions-visits/descriptions-visits.tsx";
-import delete_icon from '@/assets/icons/icon_cross.svg';
-import {useGetStudentsInGroupQuery} from "@/api/groups.ts";
+import delete_icon from '../../../assets/icons/icon_cross.svg';
+import {useGetStudentsInGroupQuery} from "../../../api/groups.ts";
+import {Table} from "../../table/table.tsx";
+import {DescriptionsVisits} from "../descriptions-visits/descriptions-visits.tsx";
 
 interface Props {
     groupId: number;

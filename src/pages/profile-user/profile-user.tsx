@@ -1,11 +1,11 @@
 import s from './profile-user.module.css';
 import {FC, memo, useState} from "react";
-import {Profile, UserInfo} from "@/components/profile/profile.tsx";
-import {Schedules} from "@/pages/profile-user/components/schedules/schedules.tsx";
-import {useGetStudentProfileQuery} from "@/api/students.ts";
-import {EventsProfile} from "@/pages/profile-user/components/events-student/events-student.tsx";
-import {ResultsStudent} from "@/pages/profile-user/components/results-student/results-student.tsx";
 import { jwtDecode } from 'jwt-decode';
+import {useGetStudentProfileQuery} from "../../api/students.ts";
+import {Profile, UserInfo} from "../../components/profile/profile.tsx";
+import {Schedules} from "./components/schedules/schedules.tsx";
+import {EventsProfile} from "./components/events-student/events-student.tsx";
+import {ResultsStudent} from "./components/results-student/results-student.tsx";
 
 const buttons = [
     {title: 'Расписания', id: 'schedule'},

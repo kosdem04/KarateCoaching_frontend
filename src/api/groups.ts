@@ -1,6 +1,6 @@
-import {baseApi} from "@/api/api.ts";
-import {Groups, Student} from "@/api/types-api.ts";
-import {groupAdd, groups} from "@/app/urls.ts";
+import {baseApi} from "./api.ts";
+import {Groups, Student} from "./types-api.ts";
+import {groupAdd, groups} from "../app/urls.ts";
 
 export const groupsApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
