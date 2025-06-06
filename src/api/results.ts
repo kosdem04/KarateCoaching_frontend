@@ -23,14 +23,14 @@ export const resultsApi = baseApi.injectEndpoints({
             transformResponse: (response: any) => response,
             invalidatesTags: ["results"],
         }),
-        // createGroup: build.mutation({
-        //     query: (name: string) => ({
-        //         url: groupAdd,
-        //         method: "POST",
-        //         body: {name},
-        //     }),
-        //     invalidatesTags: ["groups"],
-        // }),
+        updateResults: build.mutation({
+            query: (results_id: number) => ({
+                url: `${results}${results_id}`,
+                method: "POST",
+                body: {results_id},
+            }),
+            invalidatesTags: ["groups"],
+        }),
     }),
 });
 

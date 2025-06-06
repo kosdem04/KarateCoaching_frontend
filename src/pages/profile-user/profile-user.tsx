@@ -15,9 +15,10 @@ const buttons = [
 
 interface Props {
     student_id?: number;
+    page: 'student' | 'couch';
 }
 
-export const ProfileUser:FC<Props> = memo(({student_id}) => {
+export const ProfileUser:FC<Props> = memo(({student_id, page}) => {
     const [listActive, setListActive] = useState(buttons[0].id);
     const jwt = localStorage.getItem('token')
     const studentId = jwt ? (jwtDecode(jwt)?.sub ?? 0) : 0;
@@ -54,7 +55,7 @@ export const ProfileUser:FC<Props> = memo(({student_id}) => {
             </div>
             {listActive === buttons[0].id && <Schedules/>}
             {listActive === buttons[1].id && <EventsProfile studentId={student_id || +studentId}/>}
-            {listActive === buttons[2].id && <ResultsStudent pageStudent={true} studentId={student_id || +studentId}/>}
+            {listActive === buttons[2].id && <ResultsStudent page={page} studentId={student_id || +studentId}/>}
         </section>
     );
 });

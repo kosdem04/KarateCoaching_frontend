@@ -18,9 +18,9 @@ interface Form {
 
 export default function EditResultForm() {
     const { id } = useParams(); // id результата
-    const {data: sportsmen} = useGetStudentsQuery()
-    const {data: tournaments} = useGetEventsQuery()
-    const {data: places} = useGetResultsPlacesQuery()
+    const {data: sportsmen} = useGetStudentsQuery();
+    const {data: tournaments} = useGetEventsQuery();
+    const {data: places} = useGetResultsPlacesQuery();
     // const [sportsmen, setSportsmen] = useState([]);
     const [message, setMessage] = useState({ text: '', type: '' });
     const [showModal, setShowModal] = useState(false);
@@ -77,7 +77,7 @@ export default function EditResultForm() {
         e.preventDefault();
         if (!isChanged) return;
 
-        api.put(`results/${id}/update`, formData)
+        api.patch(`results/${id}`, formData)
             .then(() => {
                 setMessage({ text: 'Изменения сохранены!', type: 'success' });
                 setOriginalData(formData);

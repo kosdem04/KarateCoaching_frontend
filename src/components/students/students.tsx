@@ -56,7 +56,8 @@ export const Students = memo(() => {
             <div className={s.card_container}>
                 {students?.map((item) => {
                     return (
-                        <div className={s.card_schedule} key={item.student_data.id} onClick={() => onClickShowProfile(item.student_data.id)}>
+                        <div className={s.card_schedule} key={item.student_data.id}
+                             onClick={() => onClickShowProfile(item.student_data.id)}>
                             <p><strong>Имя:</strong> {item.student_data.first_name}</p>
                             <p><strong>Фаилия:</strong> {item.student_data.last_name}</p>
                             <p><strong>Почта:</strong> {item.student_data.email}</p>
@@ -68,7 +69,7 @@ export const Students = memo(() => {
                 <button className={s.delete_button} onClick={() => onClickShowProfile(null)}>
                     <img src={delete_icon} alt={'delete icon'}/>
                 </button>
-                <ProfileUser student_id={showStudentProfile}/>
+                <ProfileUser student_id={showStudentProfile} page={'couch'}/>
             </div>}
             {/*</section>*/}
             {/*{clickAddStudent && <Modal onClickClose={onClickAddStudent}>*/}
