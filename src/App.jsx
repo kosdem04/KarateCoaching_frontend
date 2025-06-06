@@ -33,7 +33,7 @@ function App() {
                                    <CoachProfile/>
                                </ProtectedAuthRoute>}/>
                         <Route path="/profile" element={<ProtectedAuthRoute>
-                            <ProfileUser/>
+                            <ProfileUser page={'student'}/>
                         </ProtectedAuthRoute>}/>
                         <Route
                             path="/my_sportsmen"

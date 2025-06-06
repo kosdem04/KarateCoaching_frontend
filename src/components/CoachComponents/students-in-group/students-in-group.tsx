@@ -57,7 +57,7 @@ const StudentsInGroup = ({groupId, onClose}: Props) => {
                             onClick={() => selectedStudentId ? setSelectedStudentId(null) : onClose}>
                         <img src={delete_icon} alt={'delete icon'}/>
                     </button>
-                    <ProfileUser student_id={selectedStudentId}/>
+                    <ProfileUser student_id={selectedStudentId} page={'couch'}/>
                 </div>
             )}
         </>

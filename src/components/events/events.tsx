@@ -102,7 +102,7 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
                 <button className={s.delete_button} onClick={() => onClickShowProfile(null)}>
                     <img src={delete_icon} alt={'delete icon'}/>
                 </button>
-                <ProfileUser student_id={showStudentProfile}/>
+                <ProfileUser student_id={showStudentProfile} page={'couch'}/>
             </div>}
             {updateEvent && <Modal onClickClose={onClickUpdateEvent}>
                 <TournamentAddForm onClickClose={onClickUpdateEvent}/>

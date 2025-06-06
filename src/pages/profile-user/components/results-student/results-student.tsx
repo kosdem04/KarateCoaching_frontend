@@ -1,23 +1,24 @@
 import {FC, Fragment, memo, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useGetResultsStudentQuery} from "../../../../api/students.ts";
 
 interface Props {
-    pageStudent?: boolean;
+    page: 'student' | 'couch';
     studentId: number;
 }
 
-export const ResultsStudent: FC<Props> = memo(({pageStudent, studentId}) => {
+export const ResultsStudent: FC<Props> = memo(({page, studentId}) => {
     const [expandedTournamentId, setExpandedTournamentId] = useState<null | number>(null);
     const {data: results} = useGetResultsStudentQuery(studentId);
     // const {data: results} = useGetResultsQuery();
+    const navigate = useNavigate()
 
     const toggleExpand = (id: number) => {
         setExpandedTournamentId(prev => (prev === id ? null : id));
     };
 
     return <div className="content">
-        {!pageStudent && <div className="profile-header">
+        {page === 'couch' && <div className="profile-header">
             <div className="profile-actions">
                 <Link to={`/my_results/add`}>
                     <button className="add-btn">
@@ -67,9 +68,9 @@ export const ResultsStudent: FC<Props> = memo(({pageStudent, studentId}) => {
                                         <tbody>
                                         {tournament.results.map((res) => (
                                             <tr key={res.id}
-                                                // onClick={() => navigate(`/my_results/${res.id}/edit`)}
+                                                onClick={() => page === 'couch' ? navigate(`/my_results/${res.id}/edit`) : undefined}
                                             >
-                                                <td>{res.student.student_data.last_name}
+                                                <td>{res.student.student_data.last_name}{' '}
                                                     {res.student.student_data.first_name.charAt(0)}.
                                                     {res.student.student_data.patronymic ? res.student.student_data.patronymic.charAt(0) + '.' : ''}</td>
                                                 <td>{res.place.name}</td>

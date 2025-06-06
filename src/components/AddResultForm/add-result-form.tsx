@@ -21,7 +21,7 @@ const AddResultForm = () => {
         addResult({
             event_id: data.tournament_id,
             student_id: data.sportsman_id,
-            place_id: data.sportsman_id,
+            place_id: data.place_id,
             points_scored: data.points_scored,
             points_missed: data.points_missed,
             number_of_fights: data.number_of_fights,
