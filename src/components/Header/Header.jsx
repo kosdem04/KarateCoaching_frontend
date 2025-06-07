@@ -11,7 +11,7 @@ export default function Header() {
     const role = localStorage.getItem("role");
     const token = localStorage.getItem("token");
     const link = role ? (role === 'coach' ? '/coach_profile' : '/profile') : '/'
-    console.log(role)
+
     // Закрытие меню при смене страницы
     useEffect(() => {
         setMenuOpen(false);

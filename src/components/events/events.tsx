@@ -3,7 +3,7 @@ import {Table} from "../table/table";
 import {FC, memo, useState} from "react";
 import delete_icon from "../../assets/icons/icon_cross.svg";
 import {Events} from "../../api/types-api.ts";
-import {useAddStudentEventMutation, useLazyGetEventsStudentsQuery} from "../../api/events.ts";
+import {useAddStudentEventMutation, useDeleteEventMutation, useLazyGetEventsStudentsQuery} from "../../api/events.ts";
 import {formatDate} from "../../shared/utils/date.ts";
 import {ProfileUser} from "../../pages/profile-user/profile-user.tsx";
 import TournamentAddForm from "../tournament-add-form/tournament-add-form.tsx";
@@ -24,6 +24,7 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
     const [trigger, {data: students}] = useLazyGetEventsStudentsQuery();
     const {data: studentsAll} = useGetStudentsQuery();
     const [addStudentEvent] = useAddStudentEventMutation()
+    const [deleteEvent] = useDeleteEventMutation()
     const [studentId, setStudentId] = useState<number | null>(null);
 
     const onClickUpdateEvent = () => {
@@ -45,6 +46,11 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
         }
     }
 
+    const clickDeleteEvent = (event: any, eventId: number) => {
+        event.stopPropagation()
+        deleteEvent(eventId)
+    }
+
     return (
         <>
             <div className={s.title_wrapper}>
@@ -57,7 +63,14 @@ export const EventsStudent: FC<Props> = memo(({events, pageStudent}) => {
                 ))}
                 renderTbody={events?.map((item) => {
                     return <tr key={item.id}>
-                        <td onClick={() => pageStudent ? undefined :onClickShowStudents(item.id)} style={{cursor: 'pointer'}}>{item.name}</td>
+                        <td onClick={() => pageStudent ? undefined : onClickShowStudents(item.id)}
+                            style={{cursor: 'pointer', display: 'flex', justifyContent: 'space-between'}}>
+                            <span>{item.name}</span>
+                            {!pageStudent &&
+                                <button onClick={(event) => clickDeleteEvent(event, item.id)}>
+                                    <img src={delete_icon} alt="delete icon"/>
+                                </button>}
+                        </td>
                         <td>{item.type.name}</td>
                         <td>{formatDate(item.date_start)}</td>
                         <td>{formatDate(item.date_end)}</td>
