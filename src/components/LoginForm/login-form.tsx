@@ -55,7 +55,7 @@ export default function LoginForm() {
 
     const onClickForgotPassword = () => setForgotPassword(prev => !prev);
     const onSubmitChangePassword = (data: any) => {
-        if(data.password === data.repeat_new_password) {
+        if(data.new_password === data.repeat_new_password) {
             resetPassword(data).unwrap().then(() => {
                 setError(null)
                 reset();
