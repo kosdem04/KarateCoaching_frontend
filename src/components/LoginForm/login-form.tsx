@@ -12,7 +12,7 @@ const inputsLogin = [
 ]
 const inputsNewPassword = [
     {name: "code", label: "Код из почты:", type: "text"},
-    {name: "password", label: "Пароль:", type: "password"},
+    {name: "new_password", label: "Пароль:", type: "password"},
     {name: "repeat_new_password", label: "Повторите пароль:", type: "password"},
 ]
 

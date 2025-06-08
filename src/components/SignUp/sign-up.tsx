@@ -6,16 +6,17 @@ import {useForm} from "react-hook-form";
 import {useStudentRegisterCoachMutation} from "../../api/auth.ts";
 
 const inputsRegister = [
-    {name: "first_name", label: 'Фамилия:', type: "text", required: true},
-    {name: "last_name", label: 'Имя:', type: "text", required: true},
+    {name: "last_name", label: 'Фамилия:', type: "text", required: true},
+    {name: "first_name", label: 'Имя:', type: "text", required: true},
     {name: "patronymic", label: 'Отчество (необязательно):', type: "text", required: false},
     {name: "email", label: 'Email:', type: "email", required: true},
-    {name: "password", label: 'Пароль:', type: "password", required: true},
-    {name: "password_repeat", label: 'Повтор пароля:', type: "password", required: true},
+    {name: "date_of_birth", label: 'Дата рождения:', type: "date", required: true},
+    // {name: "password", label: 'Пароль:', type: "password", required: true},
+    // {name: "password_repeat", label: 'Повтор пароля:', type: "password", required: true},
 ]
 const inputsRegisterStudent = [
-    {name: "first_name", label: 'Фамилия:', type: "text", required: true},
-    {name: "last_name", label: 'Имя:', type: "text", required: true},
+    {name: "last_name", label: 'Фамилия:', type: "text", required: true},
+    {name: "first_name", label: 'Имя:', type: "text", required: true},
     {name: "patronymic", label: 'Отчество (необязательно):', type: "text", required: false},
     {name: "email", label: 'Email:', type: "email", required: true},
     {name: "date_of_birth", label: 'Дата рождения:', type: "date", required: true},
