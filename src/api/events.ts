@@ -33,8 +33,15 @@ export const eventsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["events-types"],
         }),
+        deleteEvent: build.mutation({
+            query: (eventId: number) => ({
+                url: `/${events}${eventId}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["events-types"],
+        }),
         addStudentEvent: build.mutation({
-            query:({event_id, student_id}: { event_id: number, student_id: number }) => ({
+            query: ({event_id, student_id}: { event_id: number, student_id: number }) => ({
                 url: `/${events}${event_id}/${student_id}`,
                 method: "POST",
             }),
@@ -42,4 +49,11 @@ export const eventsApi = baseApi.injectEndpoints({
         }),
     }),
 });
-export const {useGetEventsQuery, useGetEventsTypesQuery, useAddEventMutation, useLazyGetEventsStudentsQuery, useAddStudentEventMutation} = eventsApi;
+export const {
+    useDeleteEventMutation,
+    useGetEventsQuery,
+    useGetEventsTypesQuery,
+    useAddEventMutation,
+    useLazyGetEventsStudentsQuery,
+    useAddStudentEventMutation
+} = eventsApi;
