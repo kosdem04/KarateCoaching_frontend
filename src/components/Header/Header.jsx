@@ -26,7 +26,7 @@ export default function Header() {
                     ? <button onClick={logout} className="logout-button">Выйти</button>
                     : <Link to="/login">Войти</Link>}
             </nav>
-            <div className="logo"><Link to={link}>Тренерская</Link></div>
+            <div className="logo"><Link to={link}>Тренерская10</Link></div>
         </header>
     );
 }
